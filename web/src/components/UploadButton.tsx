@@ -46,9 +46,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
     }, [preview]);
 
     return (
-        <div className="flex flex-col items-center space-y-4">
+        <div className="flex flex-col items-center space-y-6">
             {!preview ? (
-                <label className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                <label className="cursor-pointer bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300 ease-in-out">
                     Choose Image
                     <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
                 </label>
@@ -57,20 +57,20 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
                     <img
                         src={preview}
                         alt="Preview"
-                        className="w-40 h-40 object-cover rounded-lg border border-gray-300 shadow-md"
+                        className="w-48 h-48 object-cover rounded-xl border-4 border-gray-300 shadow-lg transform transition-all hover:scale-105 duration-300"
                     />
                     <button
                         onClick={handleRemoveImage}
-                        className="absolute top-0 right-0 bg-white rounded-full p-1 shadow-md hover:bg-gray-200"
+                        className="absolute top-0 right-0 bg-white text-gray-700 rounded-full p-2 shadow-xl hover:bg-gray-200 transition-all duration-200"
                     >
-                        <XCircle size={24} className="text-red-500" />
+                        <XCircle size={28} className="text-red-500" />
                     </button>
                 </div>
             )}
             {preview && (
                 <button
                     onClick={handleUpload}
-                    className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+                    className="bg-gradient-to-r from-green-400 to-teal-500 text-white px-6 py-3 rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300 ease-in-out"
                 >
                     Upload Image
                 </button>
