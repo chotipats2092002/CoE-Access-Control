@@ -22,7 +22,7 @@ swagger_ui_blueprint = get_swaggerui_blueprint(
 )
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "bmp", "webp"}
 
@@ -62,6 +62,9 @@ def upload_file():
     return jsonify({'message': 'File uploaded successfully', 'file_path': file_path}), 201
 
 
+@app.route('/image', methods=['GET'])
+def get_image():
+    return send_from_directory(app.config['UPLOAD_FOLDER'], 'CoE-Access-Control/BE/uploads/2025/02/12/1739356969104.jpg')
 
 
 
