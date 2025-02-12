@@ -1,19 +1,17 @@
-# Use an official Python runtime as a base image
+# ใช้ Python 3.9-slim เป็น Base Image
 FROM python:3.9-slim
 
-# Set the working directory inside the container
+# กำหนด Working Directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+# คัดลอกไฟล์ทั้งหมดไปยัง Container
 COPY . /app
 
-# Install the required dependencies
+# ติดตั้ง Dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port that Flask will run on
+# เปิด Port 5000
 EXPOSE 5000
 
-
-
-# Run the application
+# รัน Flask App
 CMD ["python", "app.py"]
