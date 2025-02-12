@@ -14,6 +14,10 @@ macOS/Linux
 ### How to upload file
 `curl -X POST http://localhost:5001/upload -F "file=@path/to/image.jpg"`
 
+เช่น `curl -X POST http://localhost:5001/upload -F "file=@Downloads/Kwai.webp"`
+
+
+
 ### ดึงรายการไฟล์ทั้งหมด
 `curl -X GET http://localhost:5001/images`
 
