@@ -115,6 +115,5 @@ def calculate():
     # return "abc"
     # return app.render_template('calculator.html', command = command)
 
-
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
