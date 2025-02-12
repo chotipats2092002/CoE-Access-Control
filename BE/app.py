@@ -9,6 +9,20 @@ import datetime
 app = Flask(__name__)
 CORS(app)
 
+
+SWAGGER_URL="/swagger"
+API_URL="/static/swagger.json"
+
+swagger_ui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': 'Access API'
+    }
+)
+app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
+
+
 # ตั้งค่าการเชื่อมต่อ PostgreSQL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://root:root@postgres:5432/image_storage'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -42,7 +56,7 @@ with app.app_context():
 
 @app.route('/ping', methods=['GET'])
 def health_check():
-    return "✅ API is running", 200
+    return "<h1 style=\"font-size: 10rem;\">🥹🥹🥹🥹🥹🥹🥹</h1>", 200
 
 def allowed_file(file):
     return "." in file.filename and file.filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
