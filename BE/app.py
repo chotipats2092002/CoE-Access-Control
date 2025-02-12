@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_swagger_ui import get_swaggerui_blueprint
+from flask_cors import CORS
 import os
 import time
 import datetime
 
 app = Flask(__name__)
+CORS(app)  # Allow CORS for all routes
 
 SWAGGER_URL="/swagger"
 API_URL="/static/swagger.json"
@@ -52,6 +54,7 @@ def upload_file():
     file.save(file_path)  
 
     return jsonify({'message': 'File uploaded successfully', 'file_path': file_path}), 201
+
 
 
 
