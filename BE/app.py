@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_swagger_ui import get_swaggerui_blueprint
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import os
 import time
 import datetime
@@ -29,11 +29,12 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 @app.route('/ping', methods=['GET'])
 def health_check():
-    return "<h1>🥹🥹🥹🥹🥹🥹🥹</h1>", 200
+    return "<h1 style=\"font-size: 10rem;\">🥹🥹🥹🥹🥹🥹🥹</h1>", 200
 
 def allowed_file(file):
     return "." in file.filename and file.filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@cross_origin()
 @app.route('/upload', methods=['POST'])
 def upload_file():
     file = request.files['file']
