@@ -11,3 +11,14 @@ macOS/Linux
 
 
 
+### How to upload file
+`curl -X POST http://localhost:5001/upload -F "file=@path/to/image.jpg"`
+
+### ดึงรายการไฟล์ทั้งหมด
+`curl -X GET http://localhost:5001/images`
+
+### ดึงไฟล์รูปภาพตาม ID
+curl -X GET http://localhost:5001/image/1
+
+#### เดี๋ยวไว้จะมาแก้ไขในส่วนของการ query โดยใช้ วัน เดืือน ปี
+
