@@ -7,7 +7,7 @@ import datetime
 
 app = Flask(__name__)
 CORS(app)  # Allow CORS for all routes
-app.config['CORS_HEADERS'] = 'Content-Type'
+# app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 SWAGGER_URL="/swagger"
@@ -36,7 +36,7 @@ def health_check():
 def allowed_file(file):
     return "." in file.filename and file.filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@cross_origin()
+# @cross_origin()
 @app.route('/upload', methods=['POST'])
 def upload_file():
     file = request.files['file']
