@@ -7,6 +7,8 @@ import datetime
 
 app = Flask(__name__)
 CORS(app)  # Allow CORS for all routes
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 SWAGGER_URL="/swagger"
 API_URL="/static/swagger.json"
