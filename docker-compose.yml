@@ -18,7 +18,7 @@ services:
     #   - FLASK_APP=app.py
     #   - FLASK_RUN_HOST=0.0.0.0
     volumes:
-      - ./BE/app.py:/app.py  #
+      - ./BE/app.py:/app/app.py  #
 
 volumes:
   postgres_data:

@@ -28,6 +28,10 @@ ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "bmp", "webp"}
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
+@app.route('/ping', methods=['GET'])
+def health_check():
+    return "<h1>🥹🥹🥹🥹🥹🥹🥹</h1>", 200
+
 def allowed_file(file):
     return "." in file.filename and file.filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
