@@ -64,7 +64,7 @@ def upload_file():
 
 @app.route('/image', methods=['GET'])
 def get_image():
-    return send_from_directory(app.config['UPLOAD_FOLDER'], 'CoE-Access-Control/BE/uploads/2025/02/12/1739356969104.jpg')
+    return send_from_directory(app.config['UPLOAD_FOLDER'], 'static/uploads/2025/02/12/1739356969104.jpg')
 
 
 
