@@ -1,11 +1,24 @@
-import copy
 from flask import Flask, request, jsonify, send_from_directory
+from flask_swagger_ui import get_swaggerui_blueprint
 import os
 import time
 import datetime
-from PIL import Image
 
 app = Flask(__name__)
+
+SWAGGER_URL="/swagger"
+API_URL="/static/swagger.json"
+
+swagger_ui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': 'Access API'
+    }
+)
+app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
+
+
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "bmp", "webp"}
@@ -39,6 +52,8 @@ def upload_file():
     file.save(file_path)  
 
     return jsonify({'message': 'File uploaded successfully', 'file_path': file_path}), 201
+
+
 
 
 if __name__ == '__main__':
