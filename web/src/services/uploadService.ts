@@ -1,9 +1,10 @@
 import axios from "axios";
 
+
 const uploadImage = async (file: File): Promise<File> => {
     const formData = new FormData();
-    formData.append("image", file);
-    const api_url = "";
+    formData.append("file", file);
+    const api_url = "http://localhost:5001/upload";
 
     try {
         const response = await axios.post(api_url, formData, {
@@ -11,6 +12,7 @@ const uploadImage = async (file: File): Promise<File> => {
                 "Content-Type": "multipart/form-data",
             },
         });
+
         return response.data;
     } catch (error) {
         console.error("Error uploading image:", error);

@@ -28,10 +28,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
     const handleUpload = async () => {
         try {
             if (selectedFile) {
-                await uploadImage(selectedFile);
-                alert("Upload successful!");
-            } else {
-                alert("No file selected!");
+                const data = await uploadImage(selectedFile);
+                console.log(data);
             }
         } catch (error) {
             alert("Upload failed!");
