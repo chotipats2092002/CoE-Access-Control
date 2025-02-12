@@ -10,5 +10,15 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_DB=image_storage
 
+  flask-app:
+    build: ./BE
+    ports:
+      - "5001:5000"  # Expose port 5001 on the host, mapping it to port 5000 inside the container
+    # environment:
+    #   - FLASK_APP=app.py
+    #   - FLASK_RUN_HOST=0.0.0.0
+    volumes:
+      - ./BE/app.py:/app.py  #
+
 volumes:
   postgres_data:
