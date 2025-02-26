@@ -2,15 +2,16 @@ import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
-
+  const links = [
+    { path: "/", name: "Upload Image" },
+    { path: "/show", name: "Show Image" },
+    { path: "/about", name: "About" },
+  ]
+  
   return (
     <nav className="bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg p-4">
       <div className="max-w-4xl mx-auto flex justify-end space-x-6">
-        {[
-          { path: "/", name: "Upload Image" },
-          { path: "/show", name: "Show Image" },
-          { path: "/about", name: "About" },
-        ].map((item) => (
+        {links.map((item) => (
           <Link
             key={item.path}
             to={item.path}

@@ -3,6 +3,9 @@ import axios from "axios";
 
 const uploadImage = async (file: File): Promise<File> => {
     const formData = new FormData();
+
+
+
     formData.append("file", file);
     const api_url = "http://localhost:5001/upload";
 
