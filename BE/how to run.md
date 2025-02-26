@@ -1,3 +1,4 @@
+### setup
 1. เข้า CoE-Access-Control\BE
 2. python -m venv venv
 3. 
@@ -5,7 +6,6 @@ Windows (PowerShell)
 `venv\Scripts\Activate` หากเจอปัญหา run `Set-ExecutionPolicy Unrestricted -Scope Process` ก่อน
 macOS/Linux
 `source venv/bin/activate`
-
 4. pip install -r requirements.txt
 5. python app.py
 
@@ -15,8 +15,6 @@ macOS/Linux
 `curl -X POST http://localhost:5001/upload -F "file=@path/to/image.jpg"`
 
 เช่น `curl -X POST http://localhost:5001/upload -F "file=@Downloads/Kwai.webp"`
-
-
 
 ### ดึงรายการไฟล์ทั้งหมด
 `curl -X GET http://localhost:5001/images`

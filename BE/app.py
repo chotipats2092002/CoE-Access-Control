@@ -102,6 +102,9 @@ def get_image(image_id):
         return jsonify({'error': 'Image not found'}), 404
     return send_from_directory(os.path.dirname(image.file_path), os.path.basename(image.file_path))
 
+
+
+#filter by year, month, day
 @app.route('/filter', methods=['GET'])
 def get_image_filter():
     year = request.args.get('year', type=int)
@@ -110,7 +113,6 @@ def get_image_filter():
 
     query = Image.query
 
-    # กรองตามปี / เดือน / วัน
     if year:
         query = query.filter(extract('year', Image.uploaded_at) == year)
     if month:
@@ -121,6 +123,11 @@ def get_image_filter():
     images = query.order_by(Image.uploaded_at.desc()).all()
 
     return jsonify([image.to_dict() for image in images])
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
