@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import UploadButton from './UploadButton';
+import UploadButton from '../components/UploadButton';
 
 const UploadImage = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);

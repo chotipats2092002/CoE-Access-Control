@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import UploadImage from "./components/UploadImage";
-import ShowImage from "./components/ShowImage";
-import About from "./components/About";
+import UploadImage from "./pages/UploadImage";
+import ShowImage from "./pages/ShowImage";
+import About from "./pages/About";
 
 function App() {
   return (
