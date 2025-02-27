@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import UploadImage from "./pages/UploadImage";
 import ShowImage from "./pages/ShowImage";
 import About from "./pages/About";
+import AdminLogin from "./pages/Admin-login";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
               <Route path="/" element={<UploadImage />} />
               <Route path="/show" element={<ShowImage />} />
               <Route path="/about" element={<About />} />
+              <Route path="/admin" element={<AdminLogin />} />
             </Routes>
           </div>
         </div>

@@ -6,6 +6,7 @@ const Navbar = () => {
     { path: "/", name: "Upload Image" },
     { path: "/show", name: "Show Image" },
     { path: "/about", name: "About" },
+    { path: "/admin", name: "Admin" },
   ]
   
   return (
