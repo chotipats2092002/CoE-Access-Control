@@ -12,11 +12,11 @@ const LoginForm = (props) => {
     return (
         <div className="flex justify-center items-center">
             <form onSubmit={handleSubmit}
-            className="flex flex-col border-2 border-gray-300 max-w-md px-10 py-18">
+            className="flex flex-col border-1 border-gray-300 max-w-md px-10 py-18 rounded-lg shadow-lg">
                 <div className="text-5xl font-semibold text-center ">Login</div>
                 <div className="mt-8">
                     <label className="text-xl font-medium ">Username</label>
-                    <input className="w-full border-2 border-gray-300 p-2 mt-2" 
+                    <input className="w-full border-2 border-gray-300 p-2 mt-2 rounded-md" 
                         type="text" 
                         placeholder="Enter your username"
                         value={username} 
@@ -25,15 +25,15 @@ const LoginForm = (props) => {
                 </div>
                 <div className="mt-4">
                     <label className="text-xl font-medium ">Password</label>
-                    <input className="w-full border-2 border-gray-300 p-2 mt-2" 
+                    <input className="w-full border-2 border-gray-300 p-2 mt-2 rounded-md" 
                         type="password" 
                         placeholder="Enter your password"
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <div className="mt-8 flex flex-col">
-                    <button type="submit" className="bg-blue-200 text-black font-medium p-2">Login</button>
+                <div className="mt-8 flex flex-col ">
+                    <button type="submit" className="bg-blue-600 text-white font-medium p-2 rounded-md cursor-pointer hover:bg-gray-400 hover:text-white">Login</button>
                 </div>
             </form>   
         </div>
