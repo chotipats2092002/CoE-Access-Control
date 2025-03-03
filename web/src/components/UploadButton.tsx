@@ -12,6 +12,8 @@ interface ImageUploadProps {
 const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
     const [preview, setPreview] = useState<string | null>(null);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0] || null;
@@ -25,20 +27,25 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
 
     const handleRemoveImage = () => {
         setPreview(null);
-        setSelectedFile(null)
+        setSelectedFile(null);
         onImageSelect(null);
     };
+
     const handleUpload = async () => {
         try {
             if (selectedFile) {
                 const data = await uploadImage(selectedFile);
-                console.log(data);
+                console.log("Upload success:", data);
+                setModalMessage("Image uploaded successfully! 🎉");
+            } else {
+                setModalMessage("No image selected! ❌");
             }
         } catch (error) {
-            alert("Upload failed!");
+            setModalMessage("Upload failed! Please try again. ❌");
             console.error("Upload error:", error);
         }
-    }
+        setIsModalOpen(true);
+    };
 
     useEffect(() => {
         return () => {
@@ -133,7 +140,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
                     <img
                         src={preview}
                         alt="Preview"
-                        className="w-48 h-48 object-cover rounded-xl border-4 border-gray-300 shadow-lg transform transition-all hover:scale-105 duration-300"
+                        className="w-96 h-96 object-cover rounded-xl border-4 border-gray-300 shadow-lg transform transition-all hover:scale-105 duration-300"
                     />
                     <button
                         onClick={handleRemoveImage}
