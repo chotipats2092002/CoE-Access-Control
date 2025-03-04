@@ -23,17 +23,14 @@ macOS/Linux
 curl -X GET http://localhost:5001/image/1
 
 #### เดี๋ยวไว้จะมาแก้ไขในส่วนของการ query โดยใช้ วัน เดืือน ปี
-
-
-
-
-
-
 เพิ่ม api ในการ login, logout ผ่านหน้าเว็บ
 
 
+## IP Camera info
+username : admin
+password : Suphak0rn
 
-
-
-
-
+### RTSPtoWeb
+แก้ config.json
+>> "url": "rtsp://admin:Suphak0rn@192.168.1.108:554/cam/realmonitor?channel=1\u0026subtype=0"
+สำหรับดึงวิดีโอจาก IP Camera แบบ realtime
