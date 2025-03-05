@@ -12,8 +12,6 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-screen bg-gray-100">
           <Navbar />
-          <div className="flex flex-grow items-center justify-center p-6">
-            <div className="bg-white shadow-xl rounded-lg p-8 w-full h-full">
               <Routes>
                 <Route path="/" element={<UploadImage />} />
                 <Route path="/show" element={<ShowImage />} />
@@ -21,8 +19,6 @@ function App() {
                 <Route path="/admin" element={<AdminLogin />} />
               </Routes>
             </div>
-          </div>
-        </div>
       </Router>
     </AuthProvider>
   );

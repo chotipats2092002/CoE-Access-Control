@@ -9,9 +9,11 @@ const UploadImage = () => {
     };
 
     return (
-        <div className="">
-            <UploadButton onImageSelect={handleImageSelect} />
-            {selectedFile && <p>{selectedFile.name}</p>}
+        <div className="flex flex-grow items-center justify-center p-6">
+            <div className="bg-white shadow-xl rounded-lg p-8 w-full h-full">
+                <UploadButton onImageSelect={handleImageSelect} />
+                {selectedFile && <p>{selectedFile.name}</p>}
+            </div>
         </div>
     );
 };
