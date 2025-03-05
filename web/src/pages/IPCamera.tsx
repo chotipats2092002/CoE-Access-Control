@@ -1,17 +1,11 @@
+import VideoFeed from "../components/VideoFeed"
+
 const IPCamera = () => {
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="flex flex-grow items-center justify-center p-6">
                 <div className="bg-white shadow-xl rounded-lg p-8  h-full flex flex-col justify-center items-center">
-                    <iframe
-                        width="560"
-                        height="315"
-                        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    ></iframe>
+                <VideoFeed src="http://localhost:8083/stream/27aec28e-6181-4753-9acd-0456a75f0289/channel/0/hls/live/index.m3u8" />
                 </div>
             </div>
             <div>
