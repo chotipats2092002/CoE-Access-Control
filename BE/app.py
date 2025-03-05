@@ -157,8 +157,19 @@ def upload_file():
 # ---------------------------
 @app.route('/images', methods=['GET'])
 def get_images():
-    images = Image.query.order_by(Image.uploaded_at.desc()).all()
-    return jsonify([image.to_dict() for image in images])
+    # pagination
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 10, type=int)
+    images = Image.query.order_by(Image.uploaded_at.desc()).paginate(page=page, per_page=per_page, error_out=False)
+    return jsonify({
+        'total': images.total,
+        'pages': images.pages,
+        'current_page': images.page,
+        'next_page': images.next_num,
+        'prev_page': images.prev_num,
+        'images': [image.to_dict() for image in images.items]
+
+    })
 
 # ---------------------------
 # Endpoint สำหรับดึงรูปภาพเฉพาะ (ต้อง Login)
