@@ -68,6 +68,8 @@ const AdminLogin = () => {
   // };
 
   return (
+    <div className="flex flex-grow items-center justify-center p-6">
+            <div className="w-full h-full">
     <div className="flex flex-col items-center justify-center w-full h-full">
       {!isLoggedIn ? (
         <LoginForm onLogin={handleLogin} />
@@ -75,6 +77,8 @@ const AdminLogin = () => {
         // ถ้าล็อกอินแล้ว
         <p className="text-xl font-semibold">You are already logged in</p>
       )}
+    </div>
+    </div>
     </div>
   );
 };

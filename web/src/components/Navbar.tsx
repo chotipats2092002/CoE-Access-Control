@@ -30,6 +30,7 @@ const Navbar = () => {
 
   // ถ้าล็อกอินแล้ว แสดงเมนู Show Image
   if (isLoggedIn) {
+    links.push({ path: "/ip-camera", name: "IP Camera"});
     links.push({ path: "/show", name: "Show Image" });
   }
 
