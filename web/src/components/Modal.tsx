@@ -1,33 +1,67 @@
 import React from "react";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
 
-interface ModalProps {
+interface ModalProps{
     isOpen: boolean;
-    onClose: () => void;
-    title?: string;
-    children: React.ReactNode;
+    iconName?: string;
+    message?: string; 
+    buttonText?: string;
+    onConfirm?: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
+function getIconByName(iconName: string) {
+    switch (iconName) {
+        case "success":
+            return <CheckCircleIcon className="text-green-500" />;
+        case "error":
+            return <XCircleIcon className="text-red-500" />;
+        default:
+            return null;
+    }
+}
+
+
+const Modal: React.FC<ModalProps> = ({
+    isOpen,
+    iconName,
+    message,
+    buttonText,
+    onConfirm
+}) => {
     if (!isOpen) return null;
 
+    const icon = iconName ? getIconByName(iconName) : null;
+
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-0">
-            <div className="bg-white rounded-lg shadow-lg w-128 p-6">
-                <div className="flex justify-center items-center border-b pb-2">
-                    <h2 className="text-lg font-semibold">{title}</h2>
+        <div className="fixed inset-0 flex items-center justify-center  backdrop-blur-xs z-10">
+            {/* กล่อง Modal */}
+            <div className="relative border-1 bg-gray-100 border-gray-300 max-w-md px-20 py-20 rounded-lg shadow-lg">
+                {/* แสดงไอคอน (ถ้ามี) */}
+                {icon && (
+                <div className="flex justify-center ">
+                    <div className="้h-70 w-60">
+                        {icon}
+                    </div>
                 </div>
-                <div className="mt-4 justify-center">{children}</div>
-                <div className="flex justify-center mt-4">
+                )}
+
+                {/* ข้อความ (message) */}
+                <p className="text-center text-xl  pt-5">{message}</p>
+
+                {/* ปุ่มหลัก */}
+                <div className="flex justify-center pt-10">
                     <button
-                        onClick={onClose}
-                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
+                        className="bg-gray-600 text-white text-xl font-medium px-10 py-2 rounded hover:bg-gray-700 cursor-pointer"
+                        onClick={() => {
+                            if (onConfirm) onConfirm();
+                        }}
                     >
-                        Close
+                    {buttonText}
                     </button>
                 </div>
             </div>
         </div>
     );
-};
+}
 
 export default Modal;

@@ -18,6 +18,10 @@ const Navbar = () => {
       }
     })
       .then(response => response.json())
+      .then(data =>{
+        console.log("Logout result",data);
+      })
+      
     navigate("/");     
   };
 
