@@ -1,6 +1,6 @@
 // src/services/authService.ts
 
-export const login = async (username: string, password: string): Promise<boolean> => {
+export const login = async (username: string, password: string)=> {
     try {
       const response = await fetch('http://localhost:5001/login', {
         method: 'POST',

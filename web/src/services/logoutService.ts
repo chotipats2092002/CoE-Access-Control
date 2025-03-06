@@ -1,6 +1,6 @@
 
 
-export const logout = async (): Promise<any> => {
+export const logout = async () => {
     try {
       const response = await fetch('http://localhost:5001/logout', {
         method: 'POST',

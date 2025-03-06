@@ -18,6 +18,7 @@ const Navbar = () => {
     }
   };
 
+  
   // เมนูพื้นฐาน
   const links = [
     { path: "/", name: "Upload Image" },

@@ -16,7 +16,7 @@ const AdminLogin = () => {
   }, [isLoggedIn, navigate]);
 
 
-  const handleLogin = async (username: string, password: string): Promise<boolean> => {
+  const handleLogin = async (username: string, password: string) => {
     const loginSuccess = await login(username, password);
     if (loginSuccess) {
       setIsLoggedIn(true);
