@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory, make_response, session
+from flask import Flask, request, jsonify, send_from_directory, make_response, session, send_file
 from flask_sqlalchemy import SQLAlchemy
 from flask_swagger_ui import get_swaggerui_blueprint
 from flask_cors import CORS
@@ -31,7 +31,7 @@ swagger_ui_blueprint = get_swaggerui_blueprint(
 )
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 
-UPLOAD_FOLDER = 'static/uploads'
+UPLOAD_FOLDER = 'uploads/secure'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "bmp", "webp"}
 if not os.path.exists(UPLOAD_FOLDER):
@@ -152,11 +152,14 @@ def upload_file():
                     'file_id': new_image.id,
                     'file_path': file_path}), 201
 
+
 # ---------------------------
 # Endpoint สำหรับดึงข้อมูลรูปภาพทั้งหมด
 # ---------------------------
 @app.route('/images', methods=['GET'])
 def get_images():
+    if 'user' not in session or session['user'] != 'admin':
+        return jsonify({'error': 'Unauthorized access'}), 401
     # pagination
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 10, type=int)
@@ -167,23 +170,25 @@ def get_images():
         'current_page': images.page,
         'next_page': images.next_num,
         'prev_page': images.prev_num,
-        'images': [image.to_dict() for image in images.items]
-
+        'images': [image.to_dict() for image in images.items],
     })
+
 
 # ---------------------------
 # Endpoint สำหรับดึงรูปภาพเฉพาะ (ต้อง Login)
 # ---------------------------
 @app.route('/image/<int:image_id>', methods=['GET'])
 def get_image(image_id):
-    if 'user' not in session:
+    # ตรวจสอบว่าเป็น admin เท่านั้นที่สามารถเข้าถึงได้
+    if 'user' not in session or session['user'] != 'admin':
         return jsonify({'error': 'Unauthorized access'}), 401
 
     image = Image.query.get(image_id)
     if not image:
         return jsonify({'error': 'Image not found'}), 404
 
-    return send_from_directory(os.path.dirname(image.file_path), os.path.basename(image.file_path))
+    # ส่งไฟล์ออกโดยใช้ send_file (หรือ send_from_directory ก็ได้)
+    return send_file(image.file_path, mimetype='image/jpeg')
 
 # ---------------------------
 # Endpoint สำหรับกรองรูปภาพตามปี, เดือน, วัน (ต้อง Login)
