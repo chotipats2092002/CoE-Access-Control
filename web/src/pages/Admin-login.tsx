@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/Form";
 import { useAuth } from "../context/AuthContext";
-import log from "video.js/dist/types/utils/log";
+import {login} from "../services/loginService"
+ 
 
 const AdminLogin = () => {
   const navigate = useNavigate();  // change route
-
   const { isLoggedIn, setIsLoggedIn } = useAuth()!;
 
   useEffect(() => {
@@ -16,29 +16,12 @@ const AdminLogin = () => {
   }, [isLoggedIn, navigate]);
 
 
-  
-  const handleLogin = async (username: any, password: any): Promise<boolean> => {
-    try {
-      const response = await fetch('http://localhost:5001/login', {
-        method: 'POST',
-        credentials: 'include', // ส่ง cookie ไปด้วย
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-      });
-      const data = await response.json();
-      console.log("Login result:", data);
-      if (data.message) {
-        setIsLoggedIn(true);  // อัปเดต context
-        return true;
-      } else {
-        return false;
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-      return false;
+  const handleLogin = async (username: string, password: string): Promise<boolean> => {
+    const loginSuccess = await login(username, password);
+    if (loginSuccess) {
+      setIsLoggedIn(true);
     }
+    return loginSuccess;
   };
 
 

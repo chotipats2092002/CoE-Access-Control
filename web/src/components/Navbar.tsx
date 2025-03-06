@@ -1,28 +1,21 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-
+import { logout } from  "../services/logoutService"
 const Navbar = () => {
   // ดึงค่า isLoggedIn และฟังก์ชัน setIsLoggedIn จาก Context
   const { isLoggedIn, setIsLoggedIn } = useAuth()!; 
   const navigate = useNavigate();
 
   // ฟังก์ชัน logout
-  const handleLogout = () => {
-    setIsLoggedIn(false);  
-      fetch('http://localhost:5001/logout', {
-      method: 'POST',
-      credentials: 'include', // ส่ง cookie ไปด้วย
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(data =>{
-        console.log("Logout result",data);
-      })
-      
-    navigate("/");     
+  const handleLogout = async () => {
+    try {
+      await logout(); // เรียกใช้ logout จาก service
+      setIsLoggedIn(false);  
+      navigate("/");     
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
   };
 
   // เมนูพื้นฐาน
