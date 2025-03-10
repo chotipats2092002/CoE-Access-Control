@@ -1,14 +1,20 @@
-import html2canvas from "html2canvas";
 import { useRef } from "react";
-import VideoFeed from "../components/VideoFeed"
+import VideoFeed from "../components/VideoFeed";
 import uploadImage from "../services/uploadService";
 
 const IPCamera = () => {
-    const captureRef = useRef(null);
+    const videoRef = useRef<{ getVideoElement: () => HTMLVideoElement } | null>(null);
 
     const handleCapture = async () => {
-        if (captureRef.current) {
-            const canvas = await html2canvas(captureRef.current);
+        if (videoRef.current) {
+            const videoElement = videoRef.current.getVideoElement();
+            const canvas = document.createElement("canvas");
+            canvas.width = videoElement.videoWidth;
+            canvas.height = videoElement.videoHeight;
+            const context = canvas.getContext("2d");
+            if (context) {
+                context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+            }
             const image = canvas.toDataURL("image/jpeg");
 
             // แปลง base64 เป็นไฟล์
@@ -30,13 +36,12 @@ const IPCamera = () => {
             }
         }
     };
+
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="flex flex-grow items-center justify-center p-6">
-                <div
-                    className="bg-white shadow-xl rounded-lg p-8 h-full flex flex-col justify-center items-center"
-                >
-                    <VideoFeed src="http://localhost:8083/stream/27aec28e-6181-4753-9acd-0456a75f0289/channel/0/hls/live/index.m3u8" ref={captureRef} />
+                <div className="bg-white shadow-xl rounded-lg p-8 h-full flex flex-col justify-center items-center">
+                    <VideoFeed src="http://localhost:8083/stream/27aec28e-6181-4753-9acd-0456a75f0289/channel/0/hls/live/index.m3u8" ref={videoRef} />
                 </div>
             </div>
             <div>
@@ -51,4 +56,4 @@ const IPCamera = () => {
     )
 }
 
-export default IPCamera
+export default IPCamera;

@@ -1,21 +1,30 @@
-import { useRef, useEffect, useState, RefObject } from "react";
+import { useRef, useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
-const VideoFeed: React.FC<VideoFeedProps> = ({ src, ref }) => {
-  const videoRef = useRef(null);
+interface VideoFeedProps {
+  src: string;
+}
+
+interface VideoFeedHandle {
+  getVideoElement: () => HTMLVideoElement | null;
+}
+
+const VideoFeed = forwardRef<VideoFeedHandle, VideoFeedProps>(({ src }, ref) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [player, setPlayer] = useState<ReturnType<typeof videojs>>();
 
+  useImperativeHandle(ref, () => ({
+    getVideoElement: () => videoRef.current
+  }));
+
   useEffect(() => {
-    // make sure Video.js player is only initialized once
     if (!player) {
       const videoElement = videoRef.current;
       if (!videoElement) return;
 
       setPlayer(
-        videojs(videoElement, {
-
-        }, () => {
+        videojs(videoElement, {}, () => {
           console.log("player is ready");
         })
       );
@@ -32,16 +41,11 @@ const VideoFeed: React.FC<VideoFeedProps> = ({ src, ref }) => {
 
   return (
     <div className="w-full h-full">
-      <video autoPlay muted style={{ width: "800px", height: "600px" }} className="video-js " ref={videoRef} controls >
-        <source ref={ref} src={src} type="application/x-mpegURL" />
+      <video autoPlay muted style={{ width: "800px", height: "600px" }} className="video-js" ref={videoRef} controls>
+        <source src={src} type="application/x-mpegURL" />
       </video>
     </div>
   );
-};
-
-interface VideoFeedProps {
-  src: string;
-  ref: RefObject<HTMLSourceElement | null>;
-}
+});
 
 export default VideoFeed;
