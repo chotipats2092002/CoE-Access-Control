@@ -1,8 +1,8 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, RefObject } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
-const VideoFeed: React.FC<VideoFeedProps> = ({ src }) => {
+const VideoFeed: React.FC<VideoFeedProps> = ({ src, ref }) => {
   const videoRef = useRef(null);
   const [player, setPlayer] = useState<ReturnType<typeof videojs>>();
 
@@ -14,7 +14,7 @@ const VideoFeed: React.FC<VideoFeedProps> = ({ src }) => {
 
       setPlayer(
         videojs(videoElement, {
-        
+
         }, () => {
           console.log("player is ready");
         })
@@ -32,8 +32,8 @@ const VideoFeed: React.FC<VideoFeedProps> = ({ src }) => {
 
   return (
     <div className="w-full h-full">
-      <video autoPlay muted style={{width: "800px", height: "600px"}}  className="video-js " ref={videoRef} controls >
-        <source src={src} type="application/x-mpegURL" />
+      <video autoPlay muted style={{ width: "800px", height: "600px" }} className="video-js " ref={videoRef} controls >
+        <source ref={ref} src={src} type="application/x-mpegURL" />
       </video>
     </div>
   );
@@ -41,6 +41,7 @@ const VideoFeed: React.FC<VideoFeedProps> = ({ src }) => {
 
 interface VideoFeedProps {
   src: string;
+  ref: RefObject<HTMLSourceElement | null>;
 }
 
 export default VideoFeed;
