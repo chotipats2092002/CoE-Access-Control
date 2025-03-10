@@ -1,10 +1,11 @@
 import axios from "axios";
 
-const getImage = async ( page: number = 1, per_page: number = 12,year?: number, month?: number, day?: number) => {
-    const api_url = `http://localhost:5001/filter?page=${page}&per_page=${per_page}year=${year}&month=${month}&day=${day}`;
+const getImages = async ( page: number = 1, per_page: number = 12) => {
+    const api_url = `http://localhost:5001/images?page=${page}&per_page=${per_page}`;
     // const api_url = `http://localhost:5001/filter?year=${year}&month=${month}&day=${day}`;
     try {
         const response = await axios.get(api_url, { withCredentials: true })
+        console.log(response.data);
         return response.data;
     } catch (error) {
         console.error("Error fetching images:", error);
@@ -12,4 +13,4 @@ const getImage = async ( page: number = 1, per_page: number = 12,year?: number, 
     }
 }
 
-export default getImage;
+export default getImages;

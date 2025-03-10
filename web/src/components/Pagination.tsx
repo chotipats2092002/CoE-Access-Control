@@ -1,42 +1,30 @@
 import React from "react";
 
-// กำหนด Props สำหรับ Pagination
 interface PaginationProps {
-  totalImages: number;
-  imagesPerPage: number;
   currentPage: number;
-  setCurrentPage: (page: number) => void;
+  totalPages: number;
+  onPageChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ totalImages, imagesPerPage, currentPage, setCurrentPage }) => {
-  const totalPages = Math.ceil(totalImages / imagesPerPage);
-
+const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
   return (
-    <div className="flex justify-center items-center mt-4 space-x-2">
-      <button
-        onClick={() => setCurrentPage(currentPage - 1)}
-        disabled={currentPage === 1}
+    <div className="flex justify-center mt-4 space-x-2">
+      <button 
         className="px-3 py-1 border rounded disabled:opacity-50"
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage <= 1}
       >
-        &lt;
+        Previous
       </button>
-
-      {Array.from({ length: totalPages }).map((_, index) => (
-        <button
-          key={index + 1}
-          onClick={() => setCurrentPage(index + 1)}
-          className={`px-3 py-1 border rounded ${currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-white"}`}
-        >
-          {index + 1}
-        </button>
-      ))}
-
-      <button
-        onClick={() => setCurrentPage(currentPage + 1)}
-        disabled={currentPage === totalPages}
+      
+      <span className="px-3 py-1 border rounded bg-gray-200">{currentPage} / {totalPages}</span>
+      
+      <button 
         className="px-3 py-1 border rounded disabled:opacity-50"
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage >= totalPages}
       >
-        &gt;
+        Next
       </button>
     </div>
   );

@@ -1,92 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import getImages from "../services/getImagesService"
 import Pagination from "./Pagination";
+import getImageById from "../services/getImageByIdService";
 
-// ประเภทของรูปภาพ
-interface Image {
+interface ImageType {
   id: number;
   url: string;
-  date: string;
+  filename: string;
 }
 
 const Gallery: React.FC = () => {
-  const [images, setImages] = useState<Image[]>([]);
-  const [filteredImages, setFilteredImages] = useState<Image[]>([]);
-  const [selectedDate, setSelectedDate] = useState<string>("");
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [loading, setLoading] = useState<boolean>(true);
-  const imagesPerPage = 12;
+  const [images, setImages] = useState<ImageType[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const perPage = 12; // แสดง 12 รูปต่อหน้า
 
-  // จำลองการโหลดข้อมูล
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      const fetchedImages: Image[] = Array.from({ length: 100 }).map((_, index) => ({
-        id: index + 1,
-        url: `https://media.discordapp.net/attachments/1204409536388272150/1319316709965824150/458338790_1043268680917923_6910155064228869957_n.png?ex=67c66b2f&is=67c519af&hm=7db97b7b63838f57bb412928b37b298b99c96a28d948412cece633b9e77080a2&=&format=webp&quality=lossless&width=800&height=479`,
-        date: `2024-02-${String((index % 28) + 1).padStart(2, "0")}`,
-      }));
+    const fetchImages = async () => {
+      try {
+        const data = await getImages(currentPage, perPage);
+        console.log("Image data =>", data);
+        // const urlList:string[] = []
+        const updatedData = await Promise.all(data.images.map(async (image:ImageType) => {
+          const imageUrl = await getImageById(image.id)
+          // urlList.push(imageUrl)
+          return {...image, url: imageUrl}
+        })) 
 
-      setImages(fetchedImages);
-      setFilteredImages(fetchedImages);
-      setLoading(false);
-    }, 1500);
-  }, []);
 
-  // ฟังก์ชัน filter ตามวันที่
-  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const date = event.target.value;
-    setSelectedDate(date);
-    if (date === "") {
-      setFilteredImages(images);
-    } else {
-      setFilteredImages(images.filter((img) => img.date === date));
-    }
-    setCurrentPage(1);
-  };
+        // console.log(data.images);
+        // setBlobUrls(urlList)
+        console.log(updatedData);
+        setImages(updatedData);
+        setTotalPages(data.pages);
+      } catch (error) {
+        console.error("Failed to load images", error);
+      }
+    };
 
-  // คำนวณรูปที่ต้องแสดงต่อหน้าตาม pagination
-  const indexOfLastImage = currentPage * imagesPerPage;
-  const indexOfFirstImage = indexOfLastImage - imagesPerPage;
-  const currentImages = filteredImages.slice(indexOfFirstImage, indexOfLastImage);
+    fetchImages();
+
+ 
+  }, [currentPage]); // ดึงข้อมูลใหม่เมื่อเปลี่ยนหน้า
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 w-full mx-auto">
-      <div className="mb-4 flex justify-end items-center">
-        <label className="text-gray-700 font-semibold mr-2">Filter by Date:</label>
-        <input
-          type="date"
-          className="border p-2 rounded"
-          value={selectedDate}
-          onChange={handleDateChange}
-        />
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold text-center mb-4">Image Gallery</h1>
+      
+      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {images.map(  (image) => (
+          <div  className="border rounded-lg overflow-hidden">
+            <img src={ image.url } alt={image.filename} className="w-full h-48 object-cover" />
+            <p className="text-center p-2">{image.filename}</p>
+          </div>
+        ))}
       </div>
 
-      {/* Skeleton Loading */}
-      {loading ? (
-        <div className="grid grid-cols-4 gap-4">
-          {Array.from({ length: 12 }).map((_, index) => (
-            <div key={index} className="animate-pulse bg-gray-300 w-full h-40 rounded-lg"></div>
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-4 gap-4">
-          {currentImages.map((image) => (
-            <div key={image.id} className="border rounded-lg overflow-hidden">
-              <img src={image.url} alt={`Image ${image.id}`} className="w-full h-56 object-cover" />
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Pagination */}
-      {!loading && (
-        <Pagination
-          totalImages={filteredImages.length}
-          imagesPerPage={imagesPerPage}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-      )}
+      <Pagination 
+        currentPage={currentPage} 
+        totalPages={totalPages} 
+        onPageChange={setCurrentPage} 
+      />
     </div>
   );
 };
