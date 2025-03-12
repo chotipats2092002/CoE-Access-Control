@@ -145,7 +145,7 @@ def generate_api_key(length=32):
 # endpoint สำหรับ gen api key
 @app.route("/create-api-key", methods=["GET"])
 def get_api_kay():
-    if "user" not in session:
+    if ('user' not in session or session['user'] != 'admin'):
         return jsonify({"error": "Unauthorized access"}), 401
 
     client_name = request.args.get("client-name", type=str)
@@ -168,7 +168,7 @@ def get_api_kay():
     
 @app.route("/list-api-keys", methods=["GET"])
 def list_api_keys():
-    if "user" not in session:
+    if ('user' not in session or session['user'] != 'admin'):
         return jsonify({"error": "Unauthorized access"}), 401
 
     # Fetch all API keys from the database
@@ -183,7 +183,7 @@ def list_api_keys():
 
 @app.route("/delete-api-key", methods=["DELETE"])
 def delete_api_key():
-    if "user" not in session:
+    if ('user' not in session or session['user'] != 'admin'):
         return jsonify({"error": "Unauthorized access"}), 401
 
     client_name = request.args.get("client-name", type=str)
@@ -259,7 +259,7 @@ def upload_file():
 def get_images():
     api_key = request.headers.get("X-API-Key")
     # return jsonify({"test": })
-    if "user" not in session or ApiKey.query.filter_by(api_key=api_key).first() is None:
+    if ('user' not in session or session['user'] != 'admin') and ApiKey.query.filter_by(api_key=api_key).first() is None:
         return jsonify({"error": "Unauthorized access"}), 401
     # pagination
     page = request.args.get("page", 1, type=int)
@@ -286,7 +286,8 @@ def get_images():
 def get_image(image_id):
     # ตรวจสอบว่าเป็น admin เท่านั้นที่สามารถเข้าถึงได้
     api_key = request.headers.get("X-API-Key")
-    if "user" not in session or ApiKey.query.filter_by(api_key=api_key).first() is None:
+    # return jsonify({"test": ApiKey.query.filter_by(api_key=api_key).first() is None})
+    if ('user' not in session or session['user'] != 'admin') and ApiKey.query.filter_by(api_key=api_key).first() is None:
         return jsonify({"error": "Unauthorized access"}), 401
 
     image = Image.query.get(image_id)
@@ -303,7 +304,7 @@ def get_image(image_id):
 @app.route("/filter", methods=["GET"])
 def get_image_filter():
     api_key = request.headers.get("X-API-Key")
-    if "user" not in session or ApiKey.query.filter_by(api_key=api_key).first() is None:
+    if ('user' not in session or session['user'] != 'admin') and ApiKey.query.filter_by(api_key=api_key).first() is None:
         return jsonify({"error": "Unauthorized access"}), 401
 
     year = request.args.get("year", type=int)
