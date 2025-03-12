@@ -54,23 +54,26 @@ const IPCamera = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center">
-            <div className="flex flex-grow items-center justify-center p-6">
-                <div className="bg-white shadow-xl rounded-lg p-8 h-full flex flex-col justify-center items-center gap-6">
-                    <VideoFeed
-                        src="http://localhost:8083/stream/27aec28e-6181-4753-9acd-0456a75f0289/channel/0/hls/live/index.m3u8"
-                        ref={videoRef}
-                    />
-                    <button
-                        onClick={handleCapture}
-                        className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
-                    >
-                        Capture
-                    </button>
-                </div>
+        <div className="flex flex-col items-center justify-center p-4">
+          <div className="w-full max-w-4xl"> {/* จำกัดความกว้างสูงสุด */}
+            <div className="bg-white shadow-xl rounded-lg p-4 md:p-8">
+                <VideoFeed
+                  src="http://localhost:8083/stream/27aec28e-6181-4753-9acd-0456a75f0289/channel/0/hls/live/index.m3u8"
+                  ref={videoRef}
+                />
+
+              <div className="flex justify-center mt-6">
+                <button
+                  onClick={handleCapture}
+                  className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition-colors"
+                >
+                  Capture
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-    );
+      );
 };
 
 export default IPCamera;

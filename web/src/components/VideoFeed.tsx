@@ -22,9 +22,14 @@ const VideoFeed = forwardRef<VideoFeedHandle, VideoFeedProps>(({ src }, ref) => 
     if (!player) {
       const videoElement = videoRef.current;
       if (!videoElement) return;
-
+  
       setPlayer(
-        videojs(videoElement, {}, () => {
+        videojs(videoElement, {
+          // เพิ่มการตั้งค่าเหล่านี้
+          fluid: true, // เปิดโหมด responsive
+          aspectRatio: '2:1', // อัตราส่วน 2:1
+          responsive: true,
+        }, () => {
           console.log("player is ready");
         })
       );
@@ -39,13 +44,26 @@ const VideoFeed = forwardRef<VideoFeedHandle, VideoFeedProps>(({ src }, ref) => 
     };
   }, [player]);
 
-  return (
-    <div className="w-full h-full">
-      <video autoPlay muted style={{ width: "1024px", height: "512px" }} className="video-js" ref={videoRef} controls>
+  // components/VideoFeed.tsx
+return (
+  <div className="w-full h-full max-w-[1024px] mx-auto"> {/* กำหนดขนาดสูงสุดและจัดกลาง */}
+    <div 
+      className="relative" 
+      style={{ 
+      }}
+    >
+      <video 
+        autoPlay 
+        muted 
+        className="video-js absolute top-0 left-0 w-full h-full object-contain" 
+        ref={videoRef} 
+        controls
+      >
         <source src={src} type="application/x-mpegURL" />
       </video>
     </div>
-  );
+  </div>
+);
 });
 
 export default VideoFeed;
