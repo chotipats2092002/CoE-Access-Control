@@ -35,8 +35,6 @@ const Navbar: React.FC = () => {
       ];
   }, [isLoggedIn]);
 
-  // ...existing imports and code...
-
   return (
     <nav className="relative bg-[#2354E6] shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
@@ -45,7 +43,6 @@ const Navbar: React.FC = () => {
             COE-ACCES-CONTROL
           </div>
 
-          {/* Desktop menu - แสดงเมื่อหน้าจอ >= 867px */}
           <div className="hidden min-[867px]:flex space-x-6">
             {links.map((item) => (
               <Link
@@ -76,7 +73,6 @@ const Navbar: React.FC = () => {
             )}
           </div>
 
-          {/* Hamburger menu - แสดงเมื่อหน้าจอ < 867px */}
           <div className="flex min-[867px]:hidden items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -108,7 +104,6 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile menu - แสดงเมื่อหน้าจอ < 867px */}
       {isOpen && (
         <div className="flex flex-col items-center absolute top-20 right-0 w-full bg-[#2354E6] px-4 pt-2 pb-4 space-y-2 shadow-lg rounded-b-lg min-[867px]:hidden z-50">
           {links.map((item) => (
