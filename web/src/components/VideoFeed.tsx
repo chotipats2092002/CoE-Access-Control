@@ -41,7 +41,7 @@ const VideoFeed = forwardRef<VideoFeedHandle, VideoFeedProps>(({ src }, ref) => 
 
   return (
     <div className="w-full h-full">
-      <video autoPlay muted style={{ width: "800px", height: "600px" }} className="video-js" ref={videoRef} controls>
+      <video autoPlay muted style={{ width: "1024px", height: "512px" }} className="video-js" ref={videoRef} controls>
         <source src={src} type="application/x-mpegURL" />
       </video>
     </div>

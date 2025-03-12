@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="h-20 flex items-center justify-between">
           <div className="text-white text-xl font-bold">
-            COE-ACCES-CONTROL
+            COE-ACCESS-CONTROL
           </div>
 
           <div className="hidden min-[867px]:flex space-x-6">
