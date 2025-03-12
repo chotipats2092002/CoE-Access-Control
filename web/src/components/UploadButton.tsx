@@ -70,12 +70,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
 
     return (
         <div className="flex flex-col">
-
-
-            <div className="p-6 flex flex-col gap-4">
-                <div className="flex flex-col gap-3">
-                    <h2 className="text-3xl">Upload your image</h2>
-                    <h4 className="text-base text-gray-400">File should be JPG, and you can upload up to 5 files max</h4>
+            <div className="p-6 flex flex-col gap-4 ">
+                <div className="flex flex-col gap-3 item-center w-full">
+                    <h2 className="text-3xl text-center">Upload your image</h2>
+                    <h4 className="text-base text-gray-400 text-center">File should be JPG, and you can upload up to 5 files max</h4>
 
                 </div>
                 <div className="border-2 border-dotted rounded-lg">
@@ -85,12 +83,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
                                 <div className="p-4 flex flex-col justify-center items-center gap-4 ">
                                     <input {...getInputProps()} />
                                     <div className="flex flex-col items-center">
-                                        <RiFolderUploadFill className="text-6xl" />
+                                        <RiFolderUploadFill className="text-6xl text-[#2354E6]" />
                                         <p>Max. file size 5 MB</p>
                                     </div>
 
                                     <div className="w-1/2 flex flex-row justify-center">
-                                        <button type="button" onClick={open} className="cursor-pointer bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300 ease-in-out">
+                                        <button type="button" onClick={open} className="cursor-pointer bg-[#2354E6] text-white px-6 py-3 rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300 ease-in-out">
                                             Browse file
                                         </button>
                                     </div>

@@ -9,7 +9,7 @@ const UploadImage = () => {
     };
 
     return (
-        <div className="flex flex-grow items-center justify-center p-6">
+        <div className="flex flex-grow items-center justify-center p-6 max-w-7xl mx-auto">
             <div className="bg-white shadow-xl rounded-lg p-8 w-full h-full">
                 <UploadButton onImageSelect={handleImageSelect} />
                 {selectedFile && <p>{selectedFile.name}</p>}
