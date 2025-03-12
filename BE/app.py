@@ -76,7 +76,7 @@ class Image(db.Model):
         return {
             "id": self.id,
             "filename": self.filename,
-            "file_path": self.file_path,
+            # "file_path": self.file_path,
             "uploaded_at": self.uploaded_at.strftime("%Y-%m-%d %H:%M:%S"),
         }
 
@@ -145,7 +145,7 @@ def generate_api_key(length=32):
 # endpoint สำหรับ gen api key
 @app.route("/create-api-key", methods=["GET"])
 def get_api_kay():
-    if "user" not in session or session["user"] != "admin":
+    if "user" not in session:
         return jsonify({"error": "Unauthorized access"}), 401
 
     client_name = request.args.get("client-name", type=str)
@@ -168,7 +168,7 @@ def get_api_kay():
     
 @app.route("/list-api-keys", methods=["GET"])
 def list_api_keys():
-    if "user" not in session or session["user"] != "admin":
+    if "user" not in session:
         return jsonify({"error": "Unauthorized access"}), 401
 
     # Fetch all API keys from the database
@@ -183,7 +183,7 @@ def list_api_keys():
 
 @app.route("/delete-api-key", methods=["DELETE"])
 def delete_api_key():
-    if "user" not in session or session["user"] != "admin":
+    if "user" not in session:
         return jsonify({"error": "Unauthorized access"}), 401
 
     client_name = request.args.get("client-name", type=str)
@@ -245,7 +245,7 @@ def upload_file():
             {
                 "message": "File uploaded successfully",
                 "file_id": new_image.id,
-                "file_path": file_path,
+                # "file_path": file_path,
             }
         ),
         201,
@@ -257,7 +257,9 @@ def upload_file():
 # ---------------------------
 @app.route("/images", methods=["GET"])
 def get_images():
-    if "user" not in session or session["user"] != "admin":
+    api_key = request.headers.get("X-API-Key")
+    # return jsonify({"test": })
+    if "user" not in session or ApiKey.query.filter_by(api_key=api_key).first() is None:
         return jsonify({"error": "Unauthorized access"}), 401
     # pagination
     page = request.args.get("page", 1, type=int)
@@ -283,7 +285,8 @@ def get_images():
 @app.route("/image/<int:image_id>", methods=["GET"])
 def get_image(image_id):
     # ตรวจสอบว่าเป็น admin เท่านั้นที่สามารถเข้าถึงได้
-    if "user" not in session or session["user"] != "admin":
+    api_key = request.headers.get("X-API-Key")
+    if "user" not in session or ApiKey.query.filter_by(api_key=api_key).first() is None:
         return jsonify({"error": "Unauthorized access"}), 401
 
     image = Image.query.get(image_id)
@@ -299,7 +302,8 @@ def get_image(image_id):
 # ---------------------------
 @app.route("/filter", methods=["GET"])
 def get_image_filter():
-    if "user" not in session:
+    api_key = request.headers.get("X-API-Key")
+    if "user" not in session or ApiKey.query.filter_by(api_key=api_key).first() is None:
         return jsonify({"error": "Unauthorized access"}), 401
 
     year = request.args.get("year", type=int)
