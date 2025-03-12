@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getImageById = async ( id: number ) => {
-    const api_url = `http://localhost:5001/image/${id}`;
+    const api_url = `${import.meta.env.VITE_API_URL}/image/${id}`;
     try {
         const response = await axios.get(api_url, {
           withCredentials: true,  // Send credentials (cookies, etc.)

@@ -2,7 +2,7 @@
 
 export const logout = async () => {
     try {
-      const response = await fetch('http://localhost:5001/logout', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
         method: 'POST',
         credentials: 'include', // ส่ง cookie ไปด้วย
         headers: {

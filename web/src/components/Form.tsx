@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Modal from "./Modal";
-import { useAuth } from "../context/AuthContext";
+
 
 const LoginForm = (props: { onLogin: (arg0: string, arg1: string) => any; }) => {
     const [username, setUsername] = useState("");

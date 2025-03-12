@@ -12,18 +12,6 @@ interface ImageUploadProps {
 const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
     const [preview, setPreview] = useState<string | null>(null);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalMessage, setModalMessage] = useState("");
-
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0] || null;
-        if (file) {
-            const objectUrl = URL.createObjectURL(file);
-            setPreview(objectUrl);
-            setSelectedFile(file);
-            onImageSelect(file);
-        }
-    };
 
     const handleRemoveImage = () => {
         setPreview(null);
@@ -36,15 +24,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
             if (selectedFile) {
                 const data = await uploadImage(selectedFile);
                 console.log("Upload success:", data);
-                setModalMessage("Image uploaded successfully! 🎉");
             } else {
-                setModalMessage("No image selected! ❌");
             }
         } catch (error) {
-            setModalMessage("Upload failed! Please try again. ❌");
             console.error("Upload error:", error);
         }
-        setIsModalOpen(true);
     };
 
     useEffect(() => {
@@ -56,7 +40,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
     }, [preview]);
 
 
-    const onDrop = useCallback((acceptedFiles: FileList) => {
+    const onDrop = useCallback((acceptedFiles: File[]) => {
         // Do something with the files
         const objectUrl = URL.createObjectURL(acceptedFiles[0]);
         setPreview(objectUrl);

@@ -12,6 +12,8 @@ services:
       POSTGRES_DB: image_storage
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - baby_network
 
   flask-app:
     build: ./BE
@@ -26,17 +28,29 @@ services:
       - postgres
     volumes:
       - ./BE/app.py:/app/app.py  #
+    networks:
+      - baby_network
   web:
     build: ./web
     ports:
       - "5173:5173"
+      # - "80:80"
     volumes:
       - ./web/src:/app/src  #
+    networks:
+      - baby_network
+    
   rtsp_to_web:
     build: ./RTSPtoWeb
     ports:
       - "8083:8083"
+    networks:
+      - baby_network
 
 
 volumes:
   postgres_data:
+
+networks:
+  baby_network:
+    driver: bridge

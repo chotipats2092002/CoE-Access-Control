@@ -1,11 +1,11 @@
-import { PureComponent, useEffect } from "react";
+import { useEffect } from "react";
 import Gallery from "../components/Gallery";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 
 const ShowImage = () => {
-  const { isLoggedIn, setIsLoggedIn } = useAuth()!;
+  const { isLoggedIn } = useAuth()!;
   const navigate = useNavigate();
 
   useEffect(() => {

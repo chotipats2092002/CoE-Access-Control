@@ -41,7 +41,7 @@ const IPCamera = () => {
         <div className="flex flex-col items-center justify-center">
             <div className="flex flex-grow items-center justify-center p-6">
                 <div className="bg-white shadow-xl rounded-lg p-8 h-full flex flex-col justify-center items-center">
-                    <VideoFeed src="http://localhost:8083/stream/27aec28e-6181-4753-9acd-0456a75f0289/channel/0/hls/live/index.m3u8" ref={videoRef} />
+                    <VideoFeed src="http://rtsp_to_web:8083/stream/27aec28e-6181-4753-9acd-0456a75f0289/channel/0/hls/live/index.m3u8" ref={videoRef} />
                 </div>
             </div>
             <div>
