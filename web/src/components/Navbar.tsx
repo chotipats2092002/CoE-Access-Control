@@ -141,6 +141,7 @@ const Navbar: React.FC = () => {
         </div>
       )}
     </nav>
+    <div className="flex justify-center items-center">
     <Modal
       isOpen = {showModal}
       iconName = "warning"
@@ -156,6 +157,7 @@ const Navbar: React.FC = () => {
         setShowModal(false);
       }}
     />
+    </div>
     </div>
   );
 };
