@@ -51,8 +51,9 @@ const LoginForm = (props: { onLogin: (arg0: string, arg1: string) => any; }) => 
             <Modal
                 isOpen={showModal}
                 iconName="error"
-                message="Login failed. Please try again."
-                buttonText="Try again"
+                title="Login failed"
+                text="Please try again"
+                confirmButtonText="Try again"
                 onConfirm={handleTryAgain}
             />
         </div >

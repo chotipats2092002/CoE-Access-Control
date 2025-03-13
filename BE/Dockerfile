@@ -7,6 +7,7 @@ WORKDIR /app
 # คัดลอกไฟล์ทั้งหมดไปยัง Container
 COPY . /app
 
+
 # ติดตั้ง Dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 

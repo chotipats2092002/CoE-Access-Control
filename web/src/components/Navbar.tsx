@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { logout } from "../services/logoutService";
 import React, { useState, useMemo } from "react";
 import { useLocation } from "react-router-dom";
-
+import Modal from "./Modal"
 interface LinkItem {
   path: string;
   name: string;
@@ -14,6 +14,8 @@ const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
 
   const handleLogout = async () => {
     await logout().catch((error) => console.error("Logout failed", error));
@@ -36,6 +38,7 @@ const Navbar: React.FC = () => {
   }, [isLoggedIn]);
 
   return (
+    <div>
     <nav className="relative bg-[#2354E6] shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="h-20 flex items-center justify-between">
@@ -58,7 +61,7 @@ const Navbar: React.FC = () => {
             ))}
             {isLoggedIn ? (
               <button
-                onClick={handleLogout}
+                onClick={() => setShowModal(true)}
                 className="px-4 py-2 rounded-lg transition duration-300 text-white bg-red-500 hover:text-white cursor-pointer flex items-center"
               >
                 Logout
@@ -121,9 +124,7 @@ const Navbar: React.FC = () => {
           ))}
           {isLoggedIn ? (
             <button
-              onClick={() => {
-                handleLogout().then(() => setIsOpen(false));
-              }}
+              onClick={() => setShowModal(true)}
               className="w-full px-4 py-2 rounded-lg  text-center duration-300 text-white bg-red-500 hover:text-white cursor-pointer"
             >
               Logout
@@ -140,6 +141,22 @@ const Navbar: React.FC = () => {
         </div>
       )}
     </nav>
+    <Modal
+      isOpen = {showModal}
+      iconName = "warning"
+      title="Are you sure"
+      text = "you want to logout?"
+      confirmButtonText = "OK"
+      cancelButtonText = "Cancel"
+      onConfirm = {()=> {
+        handleLogout();
+        setShowModal(false);
+      }}
+      onCancel={() => {
+        setShowModal(false);
+      }}
+    />
+    </div>
   );
 };
 
