@@ -26,8 +26,8 @@ const Navbar: React.FC = () => {
   const links = useMemo<LinkItem[]>(() => {
     return isLoggedIn
       ? [
-        { path: "/ip-camera", name: "IP Camera" },
         { path: "/", name: "Upload Image" },
+        { path: "/ip-camera", name: "IP Camera" },
         { path: "/show", name: "Show Image" },
         { path: "/about", name: "About" },
       ]
@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
             COE-ACCESS-CONTROL
           </div>
 
-          <div className="hidden min-[867px]:flex space-x-6">
+          <div className="hidden min-[880px]:flex space-x-6">
             {links.map((item) => (
               <Link
                 key={item.path}
@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
             )}
           </div>
 
-          <div className="flex min-[867px]:hidden items-center">
+          <div className="flex min-[880px]:hidden items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-white focus:outline-none"
