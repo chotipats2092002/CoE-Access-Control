@@ -77,7 +77,7 @@ class Image(db.Model):
             "id": self.id,
             "filename": self.filename,
             # "file_path": self.file_path,
-            "uploaded_at": self.uploaded_at.strftime("%Y-%m-%d %H:%M:%S"),
+            "uploaded_at": self.uploaded_at.strftime('%Y-%m-%d %H:%M:%S')
         }
 
 
@@ -320,6 +320,14 @@ def get_image_filter():
     images = query.order_by(Image.uploaded_at.desc()).all()
     return jsonify([image.to_dict() for image in images])
 
+@app.route('/allImages', methods=['GET'])
+def get_allImages():
+    if 'user' not in session:
+        return jsonify({'error': 'Unauthorized access'}), 401
+    images = Image.query.order_by(Image.uploaded_at.desc()).all()
+    return jsonify({
+        'images': [image.to_dict() for image in images]
+    })
 
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')

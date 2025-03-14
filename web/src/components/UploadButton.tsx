@@ -79,7 +79,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
                                 </div>
                             ) :
                                 (<div className="flex flex-row justify-center">
-                                    <div className="relative w-1/3">
+                                    <div className="relative w-1/8">
                                         <img
                                             src={preview}
                                             alt="Preview"

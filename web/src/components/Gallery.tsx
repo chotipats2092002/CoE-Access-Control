@@ -21,10 +21,13 @@ const Gallery: React.FC = () => {
     const fetchImages = async () => {
       try {
         const data = await getImages(currentPage, perPage);
-        const updatedData = await Promise.all(data.images.map(async (image: ImageType) => {
-          const imageUrl = await getImageById(image.id);
-          return { ...image, url: imageUrl };
-        }));
+        console.log("Image data =>", data);
+        const updatedData = await Promise.all(data.images.map(async (image:ImageType) => {
+          const imageUrl = await getImageById(image.id)
+          return {...image, url: imageUrl}
+        })) 
+
+        console.log(updatedData);
         setImages(updatedData);
         setTotalPages(data.pages);
       } catch (error) {
@@ -33,8 +36,8 @@ const Gallery: React.FC = () => {
     };
 
     fetchImages();
-  }, [currentPage]);
 
+  }, [currentPage]);
   const handleImageClick = (imageUrl: string) => {
     setSelectedImage(imageUrl);
   };
@@ -45,8 +48,6 @@ const Gallery: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold text-center mb-4">Image Gallery</h1>
-
       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {images.map((image) => (
           <div key={image.id} className="border rounded-lg overflow-hidden" onClick={() => handleImageClick(image.url)}>
