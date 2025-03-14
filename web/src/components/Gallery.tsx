@@ -3,6 +3,7 @@ import getImages from "../services/getImagesService";
 import getImageByFilter from "../services/getImageByFilter";
 import getImageById from "../services/getImageByIdService";
 import Pagination from "./Pagination";
+import Modal from "./Modal";
 
 interface ImageType {
   id: number;
@@ -20,7 +21,15 @@ const Gallery: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [useFilter, setUseFilter] = useState(false);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
+
   const perPage = 12;
+
+  const handleImageClick = (image: ImageType) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
 
   // Fetch images
   const fetchImages = async () => {
@@ -145,7 +154,9 @@ const Gallery: React.FC = () => {
             <div
               key={image.id}
               className="border rounded-lg overflow-hidden cursor-pointer"
+              onClick={() => handleImageClick(image)}
             >
+
               <img
                 src={image.url}
                 alt={image.filename}
@@ -165,8 +176,15 @@ const Gallery: React.FC = () => {
           onPageChange={setCurrentPage}
         />
       )}
+      <Modal
+        isOpen={isModalOpen}
+        previewImage={selectedImage?.url}
+        title={selectedImage?.filename}
+        confirmButtonText="ปิด"
+        onConfirm={() => setIsModalOpen(false)}
+      />
 
-      
+
     </div>
   );
 };
