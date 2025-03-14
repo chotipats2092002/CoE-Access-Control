@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
 
   return (
     <div>
-      <nav className="relative bg-[#2354E6] shadow-lg">
+      <nav className=" bg-[#2354E6] shadow-lg fixed left-0 right-0">
         <div className="max-w-7xl mx-auto px-4">
           <div className="h-20 flex items-center justify-between">
             <div className="text-white text-xl font-bold">

@@ -15,14 +15,12 @@ const ShowImage = () => {
   }, [])
 
   return (
-    <div className="flex flex-grow items-center justify-center p-6">
-      <div className="bg-white shadow-xl rounded-lg p-8 w-full h-full">
-        <div className="min-h-screen bg-gray-100 p-6">
-          <h1 className="text-2xl font-bold mb-4 text-center">Image Gallery</h1>
-          <Gallery />
-        </div>
+    <div className="w-full h-full flex flex-col justify-center p-4">
+      <div className=" bg-white p-6 h-full rounded-lg">
+        <h1 className="text-2xl font-bold mb-4 text-center">Image Gallery</h1>
+        <Gallery />
       </div>
-    </div>
+    </div >
   );
 
 }

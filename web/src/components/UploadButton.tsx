@@ -98,7 +98,7 @@ const UploadButton: React.FC = () => {
     });
 
     return (
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full h-full justify-center">
             <div className="p-4 sm:p-6 flex flex-col gap-3 sm:gap-4">
                 <div className="flex flex-col gap-2 sm:gap-3 item-center w-full">
                     <h2 className="text-xl sm:text-3xl text-center">Upload your image</h2>

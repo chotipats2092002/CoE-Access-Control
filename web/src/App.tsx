@@ -13,13 +13,15 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-screen bg-gray-100">
           <Navbar />
-          <Routes>
-            <Route path="/" element={<UploadImage />} />
-            <Route path="/ip-camera" element={<IPCamera />} />
-            <Route path="/show" element={<ShowImage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/admin" element={<AdminLogin />} />
-          </Routes>
+          <div className="flex flex-col items-center justify-center h-screen pt-20">
+            <Routes>
+              <Route path="/" element={<UploadImage />} />
+              <Route path="/ip-camera" element={<IPCamera />} />
+              <Route path="/show" element={<ShowImage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/admin" element={<AdminLogin />} />
+            </Routes>
+          </div>
         </div>
       </Router>
     </AuthProvider>
