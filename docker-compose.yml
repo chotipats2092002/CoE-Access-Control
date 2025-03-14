@@ -28,6 +28,8 @@ services:
       - postgres
     volumes:
       - ./BE/app.py:/app/app.py  #
+      - image_vol:/uploads
+
     networks:
       - baby_network
   web:
@@ -37,8 +39,6 @@ services:
       # - "80:80"
     volumes:
       - ./web/src:/app/src  
-      # - .\web\src:/app/src  
-      - image_vol:/app/uploads/secure
     networks:
       - baby_network
   rtsp_to_web:

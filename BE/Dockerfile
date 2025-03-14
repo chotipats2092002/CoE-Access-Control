@@ -1,6 +1,9 @@
 # ใช้ Python 3.9-slim เป็น Base Image
 FROM python:3.9-slim
 
+RUN mkdir -p /uploads/secure
+
+RUN ls -l /uploads > /log.txt
 # กำหนด Working Directory
 WORKDIR /app
 

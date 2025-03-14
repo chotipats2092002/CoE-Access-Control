@@ -41,7 +41,7 @@ swagger_ui_blueprint = get_swaggerui_blueprint(
 )
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 
-UPLOAD_FOLDER = "uploads/secure"
+UPLOAD_FOLDER = "/uploads/secure"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "bmp", "webp"}
 if not os.path.exists(UPLOAD_FOLDER):
