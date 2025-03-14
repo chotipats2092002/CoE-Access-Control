@@ -68,11 +68,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
                                     <input {...getInputProps()} />
                                     <div className="flex flex-col items-center">
                                         <RiFolderUploadFill className="text-6xl text-[#2354E6]" />
-                                        <p>Max. file size 5 MB</p>
+                                        <p className="text-gray-400">Max. file size 5 MB</p>
                                     </div>
 
                                     <div className="w-1/2 flex flex-row justify-center">
-                                        <button type="button" onClick={open} className="cursor-pointer bg-[#2354E6] text-white px-6 py-3 rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300 ease-in-out">
+                                        <button type="button" onClick={open} className="cursor-pointer bg-white text-[#2354E6] border border-[#2354E6] px-6 py-3 rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300 ease-in-out">
                                             Browse file
                                         </button>
                                     </div>

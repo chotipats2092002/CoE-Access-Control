@@ -56,7 +56,7 @@ const IPCamera = () => {
     return (
         <div className="flex flex-col items-center justify-center p-4">
           <div className="w-full max-w-4xl"> {/* จำกัดความกว้างสูงสุด */}
-            <div className="bg-white shadow-xl rounded-lg p-4 md:p-8">
+            <div className="bg-white shadow-xl rounded-lg p-4 md:p-8 flex flex-col gap-8">
                 <RTSPtoWebMSE
                   ref={videoRef}
                 />
@@ -64,7 +64,7 @@ const IPCamera = () => {
               <div className="flex justify-center">
                 <button
                   onClick={handleCapture}
-                  className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition-colors"
+                  className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition-colors cursor-pointer"
                 >
                   Capture
                 </button>
