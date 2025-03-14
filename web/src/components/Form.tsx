@@ -9,7 +9,7 @@ const LoginForm = (props: { onLogin: (arg0: string, arg1: string) => any; }) => 
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        const loginSuccess = await props.onLogin(username, password);
+        const loginSuccess = await props.onLogin(username.trim(), password.trim());
         if (!loginSuccess) {
             setShowModal(true);
         }
