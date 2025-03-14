@@ -285,7 +285,7 @@ def upload_file():
 @app.route("/images", methods=["GET"])
 def get_images():
     api_key = request.headers.get("X-API-Key")
-    # return jsonify({"test": })
+
     if ('user' not in session or session['user'] != 'admin') and ApiKey.query.filter_by(api_key=api_key).first() is None:
         return jsonify({"error": "Unauthorized access"}), 401
     # pagination
@@ -320,8 +320,9 @@ def get_image(image_id):
     if ('user' not in session or session['user'] != 'admin') and ApiKey.query.filter_by(api_key=api_key).first() is None:
         return jsonify({"error": "Unauthorized access"}), 401
 
-    # save log
-    ReqImgLog.create_record(api_key, "/image/<image_id>")
+    # save log if have api_key
+    if not api_key is None:
+        ReqImgLog.create_record(api_key, "/image/<image_id>")
 
     image = Image.query.get(image_id)
     if not image:
