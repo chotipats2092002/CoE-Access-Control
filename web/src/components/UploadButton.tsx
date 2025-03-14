@@ -8,11 +8,7 @@ import ImagePreview from "./ImagePreview";
 const FILE_SIZE_LIMIT = 5 * 1024 * 1024; // 5MB
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/jpg'];
 
-interface ImageUploadProps {
-    onImageSelect: (file: File | null) => void;
-}
-
-const UploadButton: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
+const UploadButton: React.FC = () => {
     const [preview, setPreview] = useState<string | null>(null);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +21,6 @@ const UploadButton: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
     const handleRemoveImage = () => {
         setPreview(null);
         setSelectedFile(null);
-        onImageSelect(null);
     };
 
     const handleUpload = async () => {
@@ -88,9 +83,9 @@ const UploadButton: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
             const objectUrl = URL.createObjectURL(file);
             setPreview(objectUrl);
             setSelectedFile(file);
-            onImageSelect(file);
+
         }
-    }, [onImageSelect]);
+    }, []);
 
     const { getRootProps, getInputProps, open } = useDropzone({
         onDrop,
@@ -110,7 +105,7 @@ const UploadButton: React.FC<ImageUploadProps> = ({ onImageSelect }) => {
                     <h4 className="text-base text-gray-400 text-center">File should be JPG, and you can upload up to 1 file max</h4>
                 </div>
                 <div className="border-2 border-dotted rounded-lg">
-                    <div className="min-h-[270px] flex flex-col justify-center" {...getRootProps()}>
+                    <div className="min-h-[270px] flex flex-col justify-center " {...getRootProps()}>
                         {
                             (!preview) ? (
                                 <div className="p-4 flex flex-col justify-center items-center gap-4 ">
