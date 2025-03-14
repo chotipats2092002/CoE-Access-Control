@@ -32,7 +32,7 @@ const UploadButton: React.FC = () => {
 
                 setUploadResult({
                     success: true,
-                    message: "อัปโหลดสำเร็จ"
+                    message: "Upload success"
                 });
                 setIsModalOpen(true);
             }
@@ -41,7 +41,7 @@ const UploadButton: React.FC = () => {
 
             const errorMessage = error instanceof Error
                 ? error.message
-                : "เกิดข้อผิดพลาดระหว่างการอัปโหลด โปรดลองอีกครั้ง";
+                : "An error occurred during upload. Please try again";
 
             setUploadResult({
                 success: false,
@@ -72,12 +72,12 @@ const UploadButton: React.FC = () => {
         if (acceptedFiles.length > 0) {
             const file = acceptedFiles[0];
             if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-                alert('กรุณาอัปโหลดไฟล์ JPG เท่านั้น');
+                alert('Please upload JPG files only');
                 return;
             }
 
             if (file.size > FILE_SIZE_LIMIT) {
-                alert('ขนาดไฟล์ต้องไม่เกิน 5MB');
+                alert('File size must not exceed 5MB');
                 return;
             }
             const objectUrl = URL.createObjectURL(file);
@@ -98,14 +98,17 @@ const UploadButton: React.FC = () => {
     });
 
     return (
-        <div className="flex flex-col">
-            <div className="p-6 flex flex-col gap-4 ">
-                <div className="flex flex-col gap-3 item-center w-full">
-                    <h2 className="text-3xl text-center">Upload your image</h2>
-                    <h4 className="text-base text-gray-400 text-center">File should be JPG, and you can upload up to 1 file max</h4>
+        <div className="flex flex-col w-full">
+            <div className="p-4 sm:p-6 flex flex-col gap-3 sm:gap-4">
+                <div className="flex flex-col gap-2 sm:gap-3 item-center w-full">
+                    <h2 className="text-xl sm:text-3xl text-center">Upload your image</h2>
+                    <h4 className="text-sm sm:text-base text-gray-400 text-center">
+                        File should be JPG, and you can upload up to 1 file max
+                    </h4>
                 </div>
+
                 <div className="border-2 border-dotted rounded-lg">
-                    <div className="min-h-[270px] flex flex-col justify-center " {...getRootProps()}>
+                <div className="h-full min-h-[350px] md:min-h-[270px] lg:min-h-[300px] xl:min-h-[320px] flex flex-col justify-center transition-all duration-300" {...getRootProps()}>
                         {
                             (!preview) ? (
                                 <div className="p-4 flex flex-col justify-center items-center gap-4 ">
@@ -120,9 +123,9 @@ const UploadButton: React.FC = () => {
                                             type="button"
                                             onClick={open}
                                             className="cursor-pointer bg-white text-[#2354E6] border border-[#2354E6] px-6 py-3 rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300 ease-in-out"
-                                            aria-label="เลือกไฟล์รูปภาพ"
+                                            aria-label="Browse"
                                         >
-                                            เลือกไฟล์
+                                            Browse
                                         </button>
                                     </div>
                                 </div>
@@ -137,29 +140,27 @@ const UploadButton: React.FC = () => {
                 <div className="h-3">
                     {preview && (
                         <div className="flex flex-row justify-center">
-                            <div className="">
-                                <button
-                                    onClick={handleUpload}
-                                    disabled={isUploading}
-                                    className={`text-sm bg-gradient-to-r from-green-400 to-teal-500 text-white px-4 py-3 rounded-xl shadow-lg 
-                                    ${isUploading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105 transform transition-all duration-300 ease-in-out'}`}
-                                    aria-label="อัปโหลดรูปภาพที่เลือก"
-                                >
-                                    {isUploading ? 'กำลังอัปโหลด...' : 'อัปโหลดรูปภาพ'}
-                                </button>
-                            </div>
+                            <button
+                                onClick={handleUpload}
+                                disabled={isUploading}
+                                className={`text-xs sm:text-sm bg-[#2354E6] text-white px-4 py-2 sm:px-6 sm:py-3 rounded-xl shadow-lg ${isUploading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'
+                                    } transform transition-all duration-300 ease-in-out`}
+                            >
+                                {isUploading ? 'Uploading...' : 'Upload Image'}
+                            </button>
                         </div>
                     )}
                 </div>
+
+                <Modal
+                    isOpen={isModalOpen}
+                    iconName={uploadResult.success ? "success" : "error"}
+                    title={uploadResult.success ? "success" : "fail"}
+                    text={uploadResult.message}
+                    confirmButtonText="OK"
+                    onConfirm={handleModalConfirm}
+                />
             </div>
-            <Modal
-                isOpen={isModalOpen}
-                iconName={uploadResult.success ? "success" : "error"}
-                title={uploadResult.success ? "success" : "fail"}
-                text={uploadResult.message}
-                confirmButtonText="OK"
-                onConfirm={handleModalConfirm}
-            />
         </div>
     );
 };
