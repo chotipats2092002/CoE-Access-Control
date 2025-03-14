@@ -8,6 +8,7 @@ from flask import (
     send_file,
 )
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 from flask_swagger_ui import get_swaggerui_blueprint
 from flask_cors import CORS
 import os
@@ -65,12 +66,38 @@ class ApiKey(db.Model):
     api_key = db.Column(db.String(100), unique=True, nullable=False)
 
 
+class ReqImgLog(db.Model):
+    __tablename__ = "req_img_log"
+    id = db.Column(db.Integer, primary_key=True)
+    
+    # Foreign key to ApiKey table
+    client_id = db.Column(db.Integer, db.ForeignKey('api_key.id'), nullable=False)
+    
+    endpoint = db.Column(db.String(255), nullable=False)  # Field to store the endpoint
+    
+    # Use int(time.time()) to automatically set the timestamp as Unix time
+    timestamp = db.Column(db.Integer, nullable=False, default=lambda: int(time.time()))
+    
+    @staticmethod
+    def create_record(api_key_val, endpoint):
+        """Static method to create a new record"""
+        client_id = ApiKey.query.filter_by(api_key=api_key_val).first().id
+        new_record = ReqImgLog(
+            client_id=client_id,
+            endpoint=endpoint,
+            timestamp=int(time.time())  # Set the timestamp to current Unix time
+        )
+        db.session.add(new_record)
+        db.session.commit()
+        return new_record
+    
+
 class Image(db.Model):
     __tablename__ = "image"
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(255), nullable=False)
     file_path = db.Column(db.String(500), nullable=False)
-    uploaded_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    uploaded_at = db.Column(db.DateTime, default=func.now())
 
     def to_dict(self):
         return {
@@ -292,6 +319,9 @@ def get_image(image_id):
     # return jsonify({"test": ApiKey.query.filter_by(api_key=api_key).first() is None})
     if ('user' not in session or session['user'] != 'admin') and ApiKey.query.filter_by(api_key=api_key).first() is None:
         return jsonify({"error": "Unauthorized access"}), 401
+
+    # save log
+    ReqImgLog.create_record(api_key, "/image/<image_id>")
 
     image = Image.query.get(image_id)
     if not image:
