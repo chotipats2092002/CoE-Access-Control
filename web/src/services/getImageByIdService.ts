@@ -5,7 +5,10 @@ const getImageById = async ( id: number ) => {
     try {
         const response = await axios.get(api_url, {
           withCredentials: true,  // Send credentials (cookies, etc.)
-          responseType: 'blob'    // Expect a Blob (binary data)
+          responseType: 'blob',    // Expect a Blob (binary data)
+          headers: {
+            "X-API-Key": import.meta.env.API_KEY
+          }
         });
     
         // Create a URL for the image Blob
