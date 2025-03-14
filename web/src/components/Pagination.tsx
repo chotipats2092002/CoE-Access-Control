@@ -10,7 +10,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
   return (
     <div className="flex justify-center mt-4 space-x-2">
       <button 
-        className="px-3 py-1 border rounded disabled:opacity-50"
+        className="px-3 py-1 border rounded disabled:opacity-50 bg-[#2354E6] text-white"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage <= 1}
       >
@@ -20,7 +20,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
       <span className="px-3 py-1 border rounded bg-gray-200">{currentPage} / {totalPages}</span>
       
       <button 
-        className="px-3 py-1 border rounded disabled:opacity-50"
+        className="px-3 py-1 border rounded disabled:opacity-50 bg-[#2354E6] text-white"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage >= totalPages}
       >

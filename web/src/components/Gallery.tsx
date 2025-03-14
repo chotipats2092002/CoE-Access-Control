@@ -83,7 +83,7 @@ const Gallery: React.FC = () => {
   return (
     <div className="container mx-auto p-4">
       {/* Filter Controls */}
-      <div className="flex items-center gap-4 mb-4 flex-row-reverse justify-start">
+      <div className="flex items-center gap-4 mb-4 bg-[#2354E6] text-white flex-row-reverse justify-start">
         <input
           type="date"
           value={selectedDate}
