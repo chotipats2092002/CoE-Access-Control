@@ -325,6 +325,9 @@ def get_image_filter():
 
 @app.route('/allImages', methods=['GET'])
 def get_allImages():
+    api_key = request.headers.get("X-API-Key")
+    if ('user' not in session or session['user'] != 'admin') and ApiKey.query.filter_by(api_key=api_key).first() is None:
+        return jsonify({"error": "Unauthorized access"}), 401
     if 'user' not in session:
         return jsonify({'error': 'Unauthorized access'}), 401
     images = Image.query.order_by(Image.uploaded_at.desc()).all()
