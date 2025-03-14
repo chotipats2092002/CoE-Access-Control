@@ -55,8 +55,8 @@ const IPCamera = () => {
 
     return (
         <div className="flex flex-col items-center justify-center p-4">
-          <div className="w-full max-w-4xl"> {/* จำกัดความกว้างสูงสุด */}
-            <div className="bg-white shadow-xl rounded-lg p-4 md:p-8 flex flex-col gap-8">
+          <div className="w-full max-w-5xl"> {/* จำกัดความกว้างสูงสุด */}
+            <div className="bg-white shadow-xl rounded-lg p-4 md:p-8 flex flex-col gap-4">
                 <RTSPtoWebMSE
                   ref={videoRef}
                 />

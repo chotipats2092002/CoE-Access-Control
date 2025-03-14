@@ -64,14 +64,14 @@ const Navbar: React.FC = () => {
               {isLoggedIn ? (
                 <button
                   onClick={() => setShowModal(true)}
-                  className="px-4 py-2 rounded-lg transition duration-300 text-white bg-red-500 hover:text-white cursor-pointer flex items-center"
+                  className="px-4 py-2 rounded-lg transition duration-300 text-white bg-red-500 hover:bg-red-600 hover:text-white cursor-pointer flex items-center"
                 >
                   Logout
                 </button>
               ) : (
                 <Link
                   to="/admin"
-                  className="px-4 py-2 rounded-lg transition duration-300 text-white bg-blue-500 hover:text-white cursor-pointer flex items-center"
+                  className="px-4 py-2 rounded-lg transition duration-300 text-white bg-blue-500 hover:bg-blue-600 hover:text-white cursor-pointer flex items-center"
                 >
                   Admin
                 </Link>
