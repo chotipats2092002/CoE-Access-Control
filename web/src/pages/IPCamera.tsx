@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import VideoFeed from "../components/VideoFeed";
 import uploadImage from "../services/uploadService";
 import { showPreviewModal } from "../components/PreviewModal";
 import { showAlertModal } from "../components/AlertModal";
 import { UploadResponse } from "../models/index";
+import RTSPtoWebMSE from "../components/RTSPtoWebMSE";
 
 const IPCamera = () => {
     const videoRef = useRef<{ getVideoElement: () => HTMLVideoElement } | null>(null);
@@ -55,10 +55,9 @@ const IPCamera = () => {
 
     return (
         <div className="flex flex-col items-center justify-center p-4">
-          <div className="w-full max-w-5xl"> 
-            <div className="bg-white shadow-xl rounded-lg p-4 md:p-6 gap-4 md:gap-6  flex flex-col">
-                <VideoFeed
-                  src="http://localhost:8083/stream/27aec28e-6181-4753-9acd-0456a75f0289/channel/0/hls/live/index.m3u8"
+          <div className="w-full max-w-4xl"> {/* จำกัดความกว้างสูงสุด */}
+            <div className="bg-white shadow-xl rounded-lg p-4 md:p-8">
+                <RTSPtoWebMSE
                   ref={videoRef}
                 />
 
