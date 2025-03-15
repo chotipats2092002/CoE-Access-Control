@@ -1,18 +1,7 @@
-import { useEffect } from "react";
 import Gallery from "../components/Gallery";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 
 const ShowImage = () => {
-  const { isLoggedIn } = useAuth()!;
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/admin");
-    }
-  }, [])
 
   return (
     <div className="flex flex-col items-center justify-center h-full md:h-screen pt-20 ">
