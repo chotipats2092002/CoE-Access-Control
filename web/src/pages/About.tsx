@@ -3,6 +3,18 @@ import ProfileCard from '../components/ProfileCard'
 
 const profiles = [
   {
+    name: 'Assoc. Prof Chatchai',
+    position: 'Advisor',
+    imageURL: 'public/ck.png',
+    contacts: {
+      facebook: 'https://www.facebook.com/ck.boa.39',
+      github: 'none',
+      instagram: 'none'
+    },
+    style: 'bg-radial-[at_25%_25%] from-white to-[#fcdb4d] to-75%'
+  },
+
+  {
     name: 'Suphakorn L.',
     position: 'Back-end',
     imageURL: 'public/Image/J.svg',

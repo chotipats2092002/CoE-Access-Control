@@ -114,6 +114,7 @@ const Gallery: React.FC = () => {
           onChange={handleDateChange}
           className="border p-2 rounded w-full sm:w-auto"
         />
+
         {selectedDate && (
           <button
             onClick={() => {
