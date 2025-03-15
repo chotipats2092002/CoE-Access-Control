@@ -322,7 +322,7 @@ def get_image(image_id):
 
     # save log if have api_key
     if not api_key is None:
-        ReqImgLog.create_record(api_key, "/image/<image_id>")
+        ReqImgLog.create_record(api_key, f"/image/{image_id}")
 
     image = Image.query.get(image_id)
     if not image:
