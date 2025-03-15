@@ -106,7 +106,7 @@ const UploadButton: React.FC = () => {
                 <div className="flex flex-col gap-6 sm:gap-4 item-center w-full">
                     <h2 className="text-3xl font-medium text-center">Upload your image</h2>
                     <h4 className="text-base text-gray-400 text-center">
-                        File should be JPG, and you can upload up to 1 file max
+                        File should be JPG, PNG, GIF, WEBP and you can upload up to 1 file max
                     </h4>
                 </div>
 

@@ -112,7 +112,7 @@ const Gallery: React.FC = () => {
           type="date"
           value={selectedDate}
           onChange={handleDateChange}
-          className="border p-2 rounded-xl w-full sm:w-auto"
+          className="border p-2 rounded-lg w-full sm:w-auto"
         />
 
         {selectedDate && (
@@ -168,7 +168,7 @@ const Gallery: React.FC = () => {
           images.map((image, index) => (
             <div
               key={image.id}
-              className="p-2 rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex flex-col gap-2"
+              className="p-2 rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex flex-col gap-2 shadow-md hover:shadow-lg hover:scale-[1.03] active:scale-[0.98] transition-all duration-200"
               onClick={() => handleImageClick(index)}
             >
               <img
