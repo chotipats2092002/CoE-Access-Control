@@ -107,17 +107,18 @@ const CameraCapture = () => {
     }, [createImageFile]);
 
     return (
-        <div className="flex flex-col items-center justify-center p-4">
-            <div className="w-full max-w-5xl">
-                <div className="bg-white shadow-xl rounded-lg p-4 md:p-8 flex flex-col gap-4">
-                    <RTSPtoWebMSE ref={videoRef} />
-                    <div className="flex justify-center">
-                        <Button onClick={handleCapture} aria-label="Capture image from video">
-                            Capture
-                        </Button>
-                    </div>
+        <div className="flex flex-grow items-center justify-center p-0 sm:p-6 w-full max-w-[1400px] h-full xl:max-h-[800px]  mx-auto">
+            <div className="bg-white shadow-xl rounded-lg p-4 sm:p-8 w-full h-full max-w-[1200px] flex flex-col justify-center">
+                <div className="flex flex-col gap-4 sm:gap-6r">
+                <RTSPtoWebMSE ref={videoRef} />
+                <div className="flex justify-center">
+                    <Button onClick={handleCapture} aria-label="Capture image from video">
+                        Capture
+                    </Button>
+                </div>
                 </div>
             </div>
+
 
             <Modal
                 key={previewModal.image}

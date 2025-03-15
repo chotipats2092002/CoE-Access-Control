@@ -34,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({
         showCancelButton: !!cancelButtonText,
         confirmButtonText: confirmButtonText,
         cancelButtonText: cancelButtonText,
-        confirmButtonColor: "#1E88E5",
+        confirmButtonColor: "#2354E6",
         cancelButtonColor: "#d33",
       };
 

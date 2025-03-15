@@ -100,21 +100,21 @@ const UploadButton: React.FC = () => {
     return (
         <div className="flex flex-col w-full h-full justify-center">
             <div className="p-4 sm:p-6 flex flex-col gap-3 sm:gap-4">
-                <div className="flex flex-col gap-2 sm:gap-3 item-center w-full">
-                    <h2 className="text-xl sm:text-3xl text-center">Upload your image</h2>
-                    <h4 className="text-sm sm:text-base text-gray-400 text-center">
+                <div className="flex flex-col gap-6 sm:gap-4 item-center w-full">
+                    <h2 className="text-3xl font-medium text-center">Upload your image</h2>
+                    <h4 className="text-base text-gray-400 text-center">
                         File should be JPG, and you can upload up to 1 file max
                     </h4>
                 </div>
 
                 <div className="border-2 border-dotted rounded-lg">
-                <div className="h-full min-h-[350px] md:min-h-[270px] lg:min-h-[300px] xl:min-h-[320px] flex flex-col justify-center transition-all duration-300" {...getRootProps()}>
+                <div className="h-full min-h-[350px] flex flex-col justify-center transition-all duration-300" {...getRootProps()}>
                         {
                             (!preview) ? (
-                                <div className="p-4 flex flex-col justify-center items-center gap-4 ">
+                                <div className="p-4 flex flex-col justify-center items-center gap-6 ">
                                     <input {...getInputProps()} />
-                                    <div className="flex flex-col items-center">
-                                        <RiFolderUploadFill className="text-6xl text-[#2354E6]" />
+                                    <div className="flex flex-col items-center gap-2">
+                                        <RiFolderUploadFill className="text-7xl text-[#2354E6]" />
                                         <p className="text-gray-400">Max. file size 5 MB</p>
                                     </div>
 
@@ -122,7 +122,7 @@ const UploadButton: React.FC = () => {
                                         <button
                                             type="button"
                                             onClick={open}
-                                            className="cursor-pointer bg-white text-[#2354E6] border border-[#2354E6] px-6 py-3 rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300 ease-in-out"
+                                            className="cursor-pointer bg-white text-[#2354E6] border border-[#2354E6] px-6 py-2 rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300 ease-in-out"
                                             aria-label="Browse"
                                         >
                                             Browse
@@ -143,7 +143,7 @@ const UploadButton: React.FC = () => {
                             <button
                                 onClick={handleUpload}
                                 disabled={isUploading}
-                                className={`text-xs sm:text-sm bg-[#2354E6] text-white px-4 py-2 sm:px-6 sm:py-3 rounded-xl shadow-lg ${isUploading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'
+                                className={`text-xl xl:text-base bg-[#2354E6] text-white px-6 py-2 rounded-xl shadow-lg ${isUploading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'
                                     } transform transition-all duration-300 ease-in-out`}
                             >
                                 {isUploading ? 'Uploading...' : 'Upload Image'}
