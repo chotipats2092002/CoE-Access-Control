@@ -21,6 +21,23 @@ const DriveStyleModal: React.FC<DriveStyleModalProps> = ({
   showPrevButton = true,
   showNextButton = true,
 }) => {
+
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+
+  // ----- 1) ป้องกันการเลื่อนเว็บด้านหลัง -----
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden"; // ห้ามสกอลล์
+    } else {
+      document.body.style.overflow = ""; // คืนค่าเดิม
+    }
+    // cleanup
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   // ระดับการซูม (1 = ปกติ, 2 = ซูม)
   const [scale, setScale] = useState(1);
 
@@ -84,6 +101,27 @@ const DriveStyleModal: React.FC<DriveStyleModalProps> = ({
     e.stopPropagation(); // กันไม่ให้คลิกทะลุไปปิด modal
   };
 
+
+    // ---- (2) เริ่ม Touch (เก็บตำแหน่ง X ไว้)
+    const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+      setTouchStartX(e.touches[0].clientX);
+    };
+  
+    // ---- (3) สิ้นสุด Touch → เทียบระยะ
+    const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+      if (touchStartX === null) return;
+      const diff = e.changedTouches[0].clientX - touchStartX;
+      if (diff > 50) {
+        // ปัดไปทางขวา → เรียก onPrev
+        onPrev?.();
+      } else if (diff < -50) {
+        // ปัดไปทางซ้าย → เรียก onNext
+        onNext?.();
+      }
+      setTouchStartX(null);
+    };
+
+
   // ไม่เปิด modal → ไม่ render
   if (!isOpen) return null;
 
@@ -91,13 +129,13 @@ const DriveStyleModal: React.FC<DriveStyleModalProps> = ({
     <div className="fixed inset-0 z-50 flex opacity-100 scale-100 transition-all duration-300 ease-out">
       {/* พื้นหลังเบลอ + คลิกปิด */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/99 sm:bg-black/70 sm:backdrop-blur-sm"
         onClick={onClose}
       />
 
       <div className="relative flex flex-col flex-1">
         {/* Top Bar */}
-        <div className="flex items-center justify-end gap-4 p-4 bg-black/60 backdrop-blur-sm text-white">
+        <div className="flex items-center justify-end gap-4 p-4 bg-black sm:bg-black/70 backdrop-blur-sm text-white">
           <div>
             <span className="font-semibold text-lg">{title}</span>
           </div>
@@ -110,7 +148,10 @@ const DriveStyleModal: React.FC<DriveStyleModalProps> = ({
         </div>
 
         {/* ส่วนแสดงรูป + ปุ่มก่อนหน้า/ถัดไป */}
-        <div className="relative flex-1 flex items-center justify-center overflow-hidden">
+        <div className="relative flex-1 flex items-center justify-center overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           {/* ปุ่มก่อนหน้า */}
           {showPrevButton && onPrev && (
             <button
