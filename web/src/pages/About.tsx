@@ -59,18 +59,20 @@ const profiles = [
 export class About extends PureComponent {
   render() {
     return (
-      <div className="flex flex-col flex-grow items-center justify-center p-6 w-full xl:w-[1040px] mx-auto space-y-8 ">
-                
-        {/* Team Profiles Section */}
-        <h2 className="text-2xl font-bold text-gray-800 ">Our Team</h2>
-        <ul className="flex flex-wrap gap-4 justify-center">
-          {profiles.map((profile, index) => (
-            <li key={index}>
-              <ProfileCard {...profile} />
-            </li>
-          ))}
-        </ul>
+      <div className="flex flex-col items-center justify-center h-full xl:h-screen pt-20">
+        <div className="flex flex-col flex-grow items-center justify-start p-6 w-full xl:w-[1040px] mx-auto space-y-8 ">
+
+          {/* Team Profiles Section */}
+          <h2 className="text-2xl font-bold text-gray-800 ">Our Team</h2>
+          <ul className="flex flex-wrap gap-4 justify-center">
+            {profiles.map((profile, index) => (
+              <li key={index}>
+                <ProfileCard {...profile} />
+              </li>
+            ))}
+          </ul>
         </div>
+      </div>
     )
   }
 }

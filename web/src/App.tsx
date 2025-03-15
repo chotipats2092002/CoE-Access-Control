@@ -13,7 +13,7 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-screen bg-gray-100">
           <Navbar />
-          <div className="flex flex-col items-center justify-center h-screen pt-20">
+          
             <Routes>
               <Route path="/" element={<UploadImage />} />
               <Route path="/ip-camera" element={<IPCamera />} />
@@ -22,7 +22,6 @@ function App() {
               <Route path="/admin" element={<AdminLogin />} />
             </Routes>
           </div>
-        </div>
       </Router>
     </AuthProvider>
   );
