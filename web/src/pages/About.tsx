@@ -79,7 +79,7 @@ export class About extends PureComponent {
           <ul className="flex flex-wrap gap-4 justify-center">
             {profiles.map((profile, index) => (
               <li key={index}>
-                <ProfileCard {...profile} />
+                <ProfileCard {...profile} alwaysColoredIcons={index === 0} />
               </li>
             ))}
           </ul>
