@@ -1,11 +1,12 @@
-import {  useState } from "react";
+import { useState, useRef } from "react";
 import Modal from "./Modal";
 
 
-const LoginForm = (props: { onLogin: (arg0: string, arg1: string) => any; }) => {
+const LoginForm = (props: { onLogin: (arg0: string, arg1: string) => unknown; }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [showModal, setShowModal] = useState(false);
+    const passwordInputRef = useRef<HTMLInputElement>(null);
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
@@ -20,6 +21,14 @@ const LoginForm = (props: { onLogin: (arg0: string, arg1: string) => any; }) => 
         setPassword("");
     };
 
+    const handleUsernameKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            passwordInputRef.current?.focus();
+        }
+    };
+
+
 
     return (
         <div className="flex justify-center items-center">
@@ -33,6 +42,7 @@ const LoginForm = (props: { onLogin: (arg0: string, arg1: string) => any; }) => 
                         placeholder="Enter your username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        onKeyDown={handleUsernameKeyDown}
                     />
                 </div>
                 <div className="mt-4">
@@ -42,6 +52,7 @@ const LoginForm = (props: { onLogin: (arg0: string, arg1: string) => any; }) => 
                         placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        ref={passwordInputRef}
                     />
                 </div>
                 <div className="mt-8 flex flex-col ">
