@@ -143,7 +143,7 @@ const UploadButton: React.FC = () => {
                             <button
                                 onClick={handleUpload}
                                 disabled={isUploading}
-                                className={`text-xl xl:text-base bg-[#2354E6] text-white px-6 py-2 rounded-xl shadow-lg ${isUploading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'
+                                className={`text-xl xl:text-base bg-[#2354E6] text-white px-6 py-2 rounded-xl shadow-lg ${isUploading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105 cursor-pointer'
                                     } transform transition-all duration-300 ease-in-out`}
                             >
                                 {isUploading ? 'Uploading...' : 'Upload Image'}

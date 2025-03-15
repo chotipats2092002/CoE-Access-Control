@@ -107,9 +107,9 @@ const CameraCapture = () => {
     }, [createImageFile]);
 
     return (
-        <div className="flex flex-grow items-center justify-center p-0 sm:p-6 w-full max-w-[1400px] h-full xl:max-h-[800px]  mx-auto">
-            <div className="bg-white shadow-xl rounded-lg p-4 sm:p-8 w-full h-full max-w-[1200px] flex flex-col justify-center">
-                <div className="flex flex-col gap-4 sm:gap-6r">
+        <div className="flex flex-grow items-center justify-center p-0 sm:p-6 w-full max-w-[1200px] h-full xl:max-h-[700px]  mx-auto">
+            <div className="bg-white shadow-xl rounded-lg p-4 sm:p-8 w-full h-full max-w-[1000px] flex flex-col justify-center">
+                <div className="flex flex-col gap-8 md:gap-6">
                 <RTSPtoWebMSE ref={videoRef} />
                 <div className="flex justify-center">
                     <Button onClick={handleCapture} aria-label="Capture image from video">

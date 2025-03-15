@@ -97,7 +97,7 @@ const DriveStyleModal: React.FC<DriveStyleModalProps> = ({
 
       <div className="relative flex flex-col flex-1">
         {/* Top Bar */}
-        <div className="flex items-center justify-between p-4 bg-black/60 backdrop-blur-sm text-white">
+        <div className="flex items-center justify-end gap-4 p-4 bg-black/60 backdrop-blur-sm text-white">
           <div>
             <span className="font-semibold text-lg">{title}</span>
           </div>
@@ -115,7 +115,7 @@ const DriveStyleModal: React.FC<DriveStyleModalProps> = ({
           {showPrevButton && onPrev && (
             <button
               onClick={onPrev}
-              className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl w-12 h-12 items-center justify-center rounded-full cursor-pointer"
+              className="pb-1 bg-gray-900 hover:bg-gray-500 hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl w-12 h-12 items-center justify-center rounded-full cursor-pointer"
             >
               &lt;
             </button>
@@ -145,7 +145,7 @@ const DriveStyleModal: React.FC<DriveStyleModalProps> = ({
           {showNextButton && onNext && (
             <button
               onClick={onNext}
-              className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl w-12 h-12 items-center justify-center rounded-full cursor-pointer"
+              className="pb-1 bg-gray-900 hover:bg-gray-500 hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl w-12 h-12 items-center justify-center  rounded-full cursor-pointer"
             >
               &gt;
             </button>
