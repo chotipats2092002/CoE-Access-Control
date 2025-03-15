@@ -107,12 +107,12 @@ const Gallery: React.FC = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4 text-center">Image Gallery</h1>
       {/* Filter Controls */}
-      <div className="flex items-center gap-4 mb-4 flex-row-reverse justify-start">
+      <div className="flex flex-col sm:flex-row justify-end items-center gap-2 sm:gap-4 mb-4">
         <input
           type="date"
           value={selectedDate}
           onChange={handleDateChange}
-          className="border p-2 rounded"
+          className="border p-2 rounded w-full sm:w-auto"
         />
         {selectedDate && (
           <button
@@ -121,7 +121,8 @@ const Gallery: React.FC = () => {
               setUseFilter(false);
               setCurrentPage(1);
             }}
-            className="bg-[#2354E6] text-white w-26 h-10 px-3 py-1 rounded cursor-pointer hover:bg-white hover:text-[#2354E6] hover:border hover:border-[#2354E6]"
+            className="bg-[#2354E6] text-white px-4 py-2 rounded cursor-pointer 
+                 hover:bg-white hover:text-[#2354E6] hover:border hover:border-[#2354E6]"
           >
             Show all
           </button>
