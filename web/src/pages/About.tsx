@@ -8,7 +8,7 @@ const profiles = [
     imageURL: 'public/ck.png',
     contacts: {
       facebook: 'https://www.facebook.com/ck.boa.39',
-      github: 'none',
+      github: 'https://github.com/ckboa',
       instagram: 'none'
     },
     style: 'bg-radial-[at_25%_25%] from-white to-[#fcdb4d] to-75%'
