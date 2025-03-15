@@ -59,9 +59,8 @@ const profiles = [
 export class About extends PureComponent {
   render() {
     return (
-      <div className="flex flex-col flex-grow items-center justify-center p-6 w-full xl:w-[1040px] mx-auto space-y-8">
-         
-
+      <div className="flex flex-col flex-grow items-center justify-center p-6 w-full xl:w-[1040px] mx-auto space-y-8 ">
+                
         {/* Team Profiles Section */}
         <h2 className="text-2xl font-bold text-gray-800 ">Our Team</h2>
         <ul className="flex flex-wrap gap-4 justify-center">
@@ -71,7 +70,7 @@ export class About extends PureComponent {
             </li>
           ))}
         </ul>
-      </div>
+        </div>
     )
   }
 }
