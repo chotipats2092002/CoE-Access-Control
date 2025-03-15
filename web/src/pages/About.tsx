@@ -11,7 +11,7 @@ const profiles = [
       github: 'https://github.com/ckboa',
       instagram: 'none'
     },
-    style: 'bg-radial-[at_25%_25%] from-white to-[#fcdb4d] to-75%'
+    style: 'bg-radial-[at_25%_25%] from-white to-[#fcdb4d] to-75%',
   },
 
   {
