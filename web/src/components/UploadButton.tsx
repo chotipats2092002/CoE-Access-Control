@@ -6,7 +6,7 @@ import Modal from "./Modal";
 import ImagePreview from "./ImagePreview";
 
 const FILE_SIZE_LIMIT = 5 * 1024 * 1024; // 5MB
-const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/jpg'];
+const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
 
 const UploadButton: React.FC = () => {
     const [preview, setPreview] = useState<string | null>(null);
@@ -92,7 +92,10 @@ const UploadButton: React.FC = () => {
         maxFiles: 1,
         noClick: true,
         accept: {
-            'image/jpeg': ['.jpg', '.jpeg']
+            'image/jpeg': ['.jpg', '.jpeg'],
+            'image/png': ['.png'],
+            'image/gif': ['.gif'],
+            'image/webp': ['.webp']
         },
         maxSize: FILE_SIZE_LIMIT,
     });
@@ -108,7 +111,7 @@ const UploadButton: React.FC = () => {
                 </div>
 
                 <div className="border-2 border-dotted rounded-lg">
-                <div className="h-full min-h-[350px] flex flex-col justify-center transition-all duration-300" {...getRootProps()}>
+                    <div className="h-full min-h-[350px] flex flex-col justify-center transition-all duration-300" {...getRootProps()}>
                         {
                             (!preview) ? (
                                 <div className="p-4 flex flex-col justify-center items-center gap-6 ">

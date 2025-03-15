@@ -112,7 +112,7 @@ const Gallery: React.FC = () => {
           type="date"
           value={selectedDate}
           onChange={handleDateChange}
-          className="border p-2 rounded w-full sm:w-auto"
+          className="border p-2 rounded-xl w-full sm:w-auto"
         />
 
         {selectedDate && (
