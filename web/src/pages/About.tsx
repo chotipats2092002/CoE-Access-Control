@@ -32,7 +32,7 @@ const profiles = [
     contacts: {
       facebook: 'https://www.facebook.com/ai.soon.2024',
       github: 'https://github.com/IsoonSer',
-      instagram: 'https://www.instagram.com/is_beginner/'
+      instagram: 'https://www.instagram.com/iamisoon/'
     }
   },
   {
