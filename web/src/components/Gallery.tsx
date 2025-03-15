@@ -119,7 +119,7 @@ const Gallery: React.FC = () => {
               setUseFilter(false);
               setCurrentPage(1);
             }}
-            className="bg-[#2354E6] text-white w-26 h-10 px-3 py-1 rounded cursor-pointer hover:bg-white hover:text-[#2354E6]"
+            className="bg-[#2354E6] text-white w-26 h-10 px-3 py-1 rounded cursor-pointer hover:bg-white hover:text-[#2354E6] hover:border hover:border-[#2354E6]"
           >
             Show all
           </button>
@@ -131,8 +131,29 @@ const Gallery: React.FC = () => {
         {loading ? (
           // ... Skeleton Loading ...
           Array.from({ length: perPage }).map((_, index) => (
-            <div key={index} className="animate-pulse border rounded-lg">
-              {/* ... */}
+            <div
+              key={index}
+              role="status"
+              className="space-y-2 animate-pulse border rounded-lg overflow-hidden"
+            >
+              <div className="flex items-center justify-center w-full h-48 bg-gray-300 dark:bg-gray-700">
+                <svg
+                  className="w-12 h-12 text-gray-200 dark:text-gray-600"
+                  aria-hidden="true"
+                  fill="currentColor"
+                  viewBox="0 0 640 512"
+                >
+                  <path d="M0 96C0 60.7 28.7 32 64 32H576C611.3 32 640 60.7 640 96V416C640 
+                  451.3 611.3 480 576 480H64C28.7 480 0 451.3 0 416V96zM384 320H544V192H384V320zM96 
+                  208C96 216.8 103.2 224 112 224H320C328.8 224 336 216.8 336 208C336 199.2 328.8 
+                  192 320 192H112C103.2 192 96 199.2 96 208zM112 288C103.2 288 96 295.2 96 304C96 
+                  312.8 103.2 320 112 320H224C232.8 320 240 312.8 240 304C240 295.2 232.8 288 224 
+                  288H112z"></path>
+                </svg>
+              </div>
+              <div className="h-3 bg-gray-300 dark:bg-gray-700 w-3/4 mx-2"></div>
+              <div className="h-3 bg-gray-300 dark:bg-gray-700 w-2/3 mx-2"></div>
+              <span className="sr-only">Loading...</span>
             </div>
           ))
         ) : images.length === 0 ? (
