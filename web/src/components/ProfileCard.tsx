@@ -11,11 +11,9 @@ interface ProfileCardProp {
         instagram: string;
     };
     style?: string;
-
 }
 
 const ProfileCard: React.FC<ProfileCardProp> = ({ name, position, imageURL, contacts, style='bg-white' }) => {
-    const styleHv = (position == 'Advisor') ? '' : 'text-gray-600 hover:'
     return (
         <div className="relative">
             {/* <div className="border border-gray-400 rounded-md bg-white p-16 relative z-20">1</div> */}
@@ -39,17 +37,17 @@ const ProfileCard: React.FC<ProfileCardProp> = ({ name, position, imageURL, cont
                 <div className="mt-4 flex space-x-4">
                     {contacts.facebook && (
                         <a href={contacts.facebook} target="_blank" rel="noopener noreferrer">
-                            <FaFacebook className={`w-6 h-6 ${styleHv}text-blue-600 transition`} />
+                            <FaFacebook className={`w-6 h-6 text-gray-600 hover:text-blue-600 transition`} />
                         </a>
                     )}
                     {contacts.github && (
                         <a href={contacts.github} target="_blank" rel="noopener noreferrer">
-                            <FaGithub className={`w-6 h-6 ${styleHv}text-black transition`} />
+                            <FaGithub className="w-6 h-6 text-gray-600 hover:text-black transition" />
                         </a>
                     )}
                     {contacts.instagram && (
                         <a href={contacts.instagram} target="_blank" rel="noopener noreferrer">
-                            <FaInstagram className={`w-6 h-6 ${styleHv}text-pink-600 transition`} />
+                            <FaInstagram className="w-6 h-6 text-gray-600 hover:text-pink-600 transition" />
                         </a>
                     )}
                 </div>
