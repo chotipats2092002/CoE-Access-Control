@@ -103,7 +103,9 @@ const Gallery: React.FC = () => {
   };
 
   return (
+
     <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4 text-center">Image Gallery</h1>
       {/* Filter Controls */}
       <div className="flex items-center gap-4 mb-4 flex-row-reverse justify-start">
         <input
@@ -164,15 +166,15 @@ const Gallery: React.FC = () => {
           images.map((image, index) => (
             <div
               key={image.id}
-              className="border rounded-lg overflow-hidden cursor-pointer"
+              className="p-2 rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex flex-col gap-2"
               onClick={() => handleImageClick(index)}
             >
               <img
                 src={image.url}
                 alt={image.filename}
-                className="w-full h-48 object-cover"
+                className="w-full h-48 object-cover rounded-sm"
               />
-              <p className="text-center p-2">{image.filename}</p>
+              <p className="text-center">{image.filename}</p>
             </div>
           ))
         )}
