@@ -186,7 +186,7 @@ const Gallery: React.FC = () => {
           ))
         ) : images.length === 0 ? (
           <p className="col-span-full text-center text-gray-500">
-            No image today
+            No image
           </p>
         ) : (
           images.map((image, index) => (
