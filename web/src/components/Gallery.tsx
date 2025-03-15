@@ -129,7 +129,7 @@ const Gallery: React.FC = () => {
       </div>
 
       {/* Image Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-4">
         {loading ? (
           // ... Skeleton Loading ...
           Array.from({ length: perPage }).map((_, index) => (
