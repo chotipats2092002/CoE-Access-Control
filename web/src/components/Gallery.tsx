@@ -123,14 +123,14 @@ const Gallery: React.FC = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4 text-center">Image Gallery</h1>
       {/* Filter Controls */}
-      <div className="flex flex-col sm:flex-row justify-end items-center gap-2 sm:gap-4 mb-4">
+      <div className="flex flex-row sm:flex-row justify-end items-center gap-2 sm:gap-4 mb-4">
         <div className="relative inline-block">
           <input
             type="date"
             required
             value={selectedDate}
             onChange={handleDateChange}
-            className="border p-2 rounded w-full sm:w-auto"
+            className="border p-2 rounded w-full sm:w-auto min-w-[160px]"
           />
           {!selectedDate && (
             <span className="absolute left-3 top-2 text-gray-400 pointer-events-none">
