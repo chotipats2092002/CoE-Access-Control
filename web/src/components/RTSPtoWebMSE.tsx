@@ -90,6 +90,8 @@ const RTSPtoWebMSE = ({ref}: any) => {
         playsInline
         controls
         style={{ maxWidth: "100%", maxHeight: "100%" }}
+        className="custom-video"
+        disablePictureInPicture
       />
     </div>
   );

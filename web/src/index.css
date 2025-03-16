@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+@layer utilities {
+
+    /* Hide play/pause button */
+    .custom-video::-webkit-media-controls-play-button {
+        display: none !important;
+    }
+
+    /* Hide seeking (progress) bar */
+    .custom-video::-webkit-media-controls-timeline {
+        display: none !important;
+    }
+
+    /* Hide timestamp (current time & duration) */
+    .custom-video::-webkit-media-controls-current-time-display,
+    .custom-video::-webkit-media-controls-time-remaining-display {
+        display: none !important;
+    }
+
+    /* Hide Volume Control */
+  .custom-video::-webkit-media-controls-volume-slider,
+  .custom-video::-webkit-media-controls-mute-button {
+    display: none !important;
+  }
+
+}
