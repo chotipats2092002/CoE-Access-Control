@@ -103,10 +103,27 @@ const Gallery: React.FC = () => {
   };
 
   return (
-
+    <>
+    <style>{`
+      /* ซ่อน placeholder ของ input type="date" เมื่อยังไม่มีค่า (invalid) */
+      input[type="date"]:invalid::-webkit-datetime-edit-text,
+      input[type="date"]:invalid::-webkit-datetime-edit-month-field,
+      input[type="date"]:invalid::-webkit-datetime-edit-day-field,
+      input[type="date"]:invalid::-webkit-datetime-edit-year-field {
+        color: transparent;
+      }
+      /* เมื่อมีค่าแล้ว (valid) ให้แสดงผลตามปกติ */
+      input[type="date"]:valid::-webkit-datetime-edit-text,
+      input[type="date"]:valid::-webkit-datetime-edit-month-field,
+      input[type="date"]:valid::-webkit-datetime-edit-day-field,
+      input[type="date"]:valid::-webkit-datetime-edit-year-field {
+        color: inherit;
+      }
+    `}</style>
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4 text-center">Image Gallery</h1>
       {/* Filter Controls */}
+<<<<<<< HEAD
       <div className="flex flex-col sm:flex-row justify-end items-center gap-2 sm:gap-4 mb-4">
         <input
           type="date"
@@ -114,6 +131,23 @@ const Gallery: React.FC = () => {
           onChange={handleDateChange}
           className="border p-2 rounded-lg w-full sm:w-auto "
         />
+=======
+      <div className="flex flex-row sm:flex-row justify-end items-center gap-2 sm:gap-4 mb-4">
+        <div className="relative inline-block">
+          <input
+            type="date"
+            required
+            value={selectedDate}
+            onChange={handleDateChange}
+            className="border p-2 rounded w-full sm:w-auto min-w-[160px]"
+          />
+          {!selectedDate && (
+            <span className="absolute left-3 top-2 text-gray-400 pointer-events-none">
+              Select Date
+            </span>
+          )}
+        </div>
+>>>>>>> d1f07835655a3c340f2006ec26e4d35f1569133c
 
         {selectedDate && (
           <button
@@ -125,7 +159,7 @@ const Gallery: React.FC = () => {
             className="bg-[#2354E6] text-white px-4 py-2 rounded cursor-pointer 
                  hover:bg-white hover:text-[#2354E6] hover:border hover:border-[#2354E6]"
           >
-            Show all
+            Clear
           </button>
         )}
       </div>
@@ -162,7 +196,7 @@ const Gallery: React.FC = () => {
           ))
         ) : images.length === 0 ? (
           <p className="col-span-full text-center text-gray-500">
-            No image today
+            No image
           </p>
         ) : (
           images.map((image, index) => (
@@ -210,6 +244,7 @@ const Gallery: React.FC = () => {
         }
       />
     </div>
+    </>
   );
 };
 
