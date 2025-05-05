@@ -123,15 +123,6 @@ const Gallery: React.FC = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4 text-center">Image Gallery</h1>
       {/* Filter Controls */}
-<<<<<<< HEAD
-      <div className="flex flex-col sm:flex-row justify-end items-center gap-2 sm:gap-4 mb-4">
-        <input
-          type="date"
-          value={selectedDate}
-          onChange={handleDateChange}
-          className="border p-2 rounded-lg w-full sm:w-auto "
-        />
-=======
       <div className="flex flex-row sm:flex-row justify-end items-center gap-2 sm:gap-4 mb-4">
         <div className="relative inline-block">
           <input
@@ -147,7 +138,6 @@ const Gallery: React.FC = () => {
             </span>
           )}
         </div>
->>>>>>> d1f07835655a3c340f2006ec26e4d35f1569133c
 
         {selectedDate && (
           <button
